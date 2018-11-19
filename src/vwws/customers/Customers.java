@@ -17,6 +17,14 @@ import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 import vwws.util.MyConnection;
 
+
+
+
+
+
+
+
+
 /**
  *
  * @author Guinness
@@ -112,6 +120,7 @@ public class Customers {
     }
 
     public static void add_data(to_customers to_customers) {
+      
         try {
             Connection conn = MyConnection.connect();
             String s0 = "insert into customers("

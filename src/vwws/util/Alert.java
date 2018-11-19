@@ -7,6 +7,7 @@ package vwws.util;
 import java.awt.Window;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.CloseDialog;
+import synsoftech.util.Center;
 
 /**
  *
