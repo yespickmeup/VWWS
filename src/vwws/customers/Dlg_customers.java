@@ -1448,7 +1448,7 @@ public class Dlg_customers extends javax.swing.JDialog {
                 case 18:
                     return tt.added_by_id;
                 case 19:
-                    return tt.update_by_id;
+                  return tt.added_by_id;
                 default:
                     return tt.status;
             }
@@ -1507,22 +1507,22 @@ public class Dlg_customers extends javax.swing.JDialog {
         String contact_mobile = tf_lname8.getText();
         String contact_email = tf_lname7.getText();
         String meter_no = tf_tax_dec_no1.getText();
-        to_customers to = new to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, update_by_id, status, false, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no);
-        List<Customer_ordered_items.to_customer_ordered_items> datas = tbl_customer_ordered_items_ALM;
-        String customer_name = to.lname + ", " + to.fname + " " + to.mi;
-        Customers.add_data(to);
-        Customer_ordered_items.add_data(datas, customer_no, customer_name);
-        data_cols();
-        Alert.set(1, "");
-        tf_fname.setText("");
-        tf_mi.setText("");
-        tf_lname.setText("");
-        tf_city.setText("");
-        tf_barangay.setText("");
-        tf_purok.setText("");
-        tf_address.setText("");
-        tf_tax_dec_no.setText("");
-        tf_fname.grabFocus();
+//        to_customers to = new to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, update_by_id, status, false, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no);
+//        List<Customer_ordered_items.to_customer_ordered_items> datas = tbl_customer_ordered_items_ALM;
+//        String customer_name = to.lname + ", " + to.fname + " " + to.mi;
+//        Customers.add_data(to);
+//        Customer_ordered_items.add_data(datas, customer_no, customer_name);
+//        data_cols();
+//        Alert.set(1, "");
+//        tf_fname.setText("");
+//        tf_mi.setText("");
+//        tf_lname.setText("");
+//        tf_city.setText("");
+//        tf_barangay.setText("");
+//        tf_purok.setText("");
+//        tf_address.setText("");
+//        tf_tax_dec_no.setText("");
+//        tf_fname.grabFocus();
 
         cardLayout1.show(jPanel5, "2");
     }
@@ -1647,8 +1647,8 @@ public class Dlg_customers extends javax.swing.JDialog {
         String contact_mobile = tf_lname8.getText();
         String contact_email = tf_lname7.getText();
         String meter_no = tf_tax_dec_no1.getText();
-        to_customers to1 = new to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, update_by_id, status, false, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no);
-        Customers.update_data(to1);
+//        to_customers to1 = new to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, update_by_id, status, false, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no);
+//        Customers.update_data(to1);
 
         data_cols();
         Alert.set(2, "");

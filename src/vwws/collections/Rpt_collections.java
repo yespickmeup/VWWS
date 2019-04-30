@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+import synsoftech.util.DateType;
 import vwws.util.MyConnection;
 
 /**
@@ -41,17 +42,56 @@ public class Rpt_collections {
         double cash;
         double check_amount;
         double discount_amount;
-
+        String status;
+        String date;
+        String account_no;
+        String meter_no;
         public field() {
         }
 
-        public field(String or_no, String customer_name, double amount_due, double cash, double check_amount, double discount_amount) {
+        public field(String or_no, String customer_name, double amount_due, double cash, double check_amount, double discount_amount, String status,String date,String account_no,String meter_no) {
             this.or_no = or_no;
             this.customer_name = customer_name;
             this.amount_due = amount_due;
             this.cash = cash;
             this.check_amount = check_amount;
             this.discount_amount = discount_amount;
+            this.status = status;
+            this.date=date;
+            this.account_no=account_no;
+            this.meter_no=meter_no;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getAccount_no() {
+            return account_no;
+        }
+
+        public void setAccount_no(String account_no) {
+            this.account_no = account_no;
+        }
+
+        public String getMeter_no() {
+            return meter_no;
+        }
+
+        public void setMeter_no(String meter_no) {
+            this.meter_no = meter_no;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
 
         public String getOr_no() {
@@ -171,6 +211,8 @@ public class Rpt_collections {
                     + ",update_by_id"
                     + ",status"
                     + ",is_counted"
+                    + ",ifnull(customer_no,'')"
+                    + ",ifnull(meter_no,'')"
                     + " from reading_payments"
                     + " " + where;
 
@@ -208,9 +250,15 @@ public class Rpt_collections {
                 String update_by_id = rs.getString(29);
                 int status = rs.getInt(30);
                 int is_counted = rs.getInt(31);
-
+                String status1="Counted";
+                if(status==1){
+                    status1="Void";
+                }
                 double cash = amount_due - check_amount;
-                Rpt_collections.field f = new field(or_no, customer_name, amount_due, cash, check_amount, discount_amount);
+                String date=DateType.convert_slash_datetime(date_added);
+                String account_no=rs.getString(32);
+                String meter_no=rs.getString(33);
+                Rpt_collections.field f = new field(or_no, customer_name, amount_due, cash, check_amount, discount_amount,status1,date,account_no,meter_no);
                 datas.add(f);
             }
             return datas;

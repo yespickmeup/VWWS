@@ -15,6 +15,7 @@ import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
 import vwws.customers.Customers;
+import vwws.customers.Customers.to_customers;
 import vwws.util.MyConnection;
 
 /**
@@ -46,8 +47,14 @@ public class Meter_reader_assignments {
         public final String occupancy_type_id;
         public final String occupancy_type;
         public final String occupancy_type_code;
-
-        public to_meter_reader_assignments(int id, String meter_reader_id, String meter_reader_no, String meter_reader_name, String customer_id, String customer_no, String customer_name, String barangay, String barangay_id, String purok, String purok_id, String date_added, String date_updated, String added_by_id, String update_by_id, int status, String occupancy_id, String occupancy, String occupancy_type_id, String occupancy_type, String occupancy_type_code) {
+        public final String city;
+        public final String city_id;
+        public final String sitio;
+        public final String sitio_id;
+        public final String meter_no;
+        public final String pipe_size;
+        public to_meter_reader_assignments(int id, String meter_reader_id, String meter_reader_no, String meter_reader_name, String customer_id, String customer_no, String customer_name, String barangay, String barangay_id, String purok, String purok_id, String date_added, String date_updated, String added_by_id, String update_by_id, int status, String occupancy_id, String occupancy, String occupancy_type_id, String occupancy_type,
+                String occupancy_type_code, String city, String city_id, String sitio, String sitio_id, String meter_no,String pipe_size) {
             this.id = id;
             this.meter_reader_id = meter_reader_id;
             this.meter_reader_no = meter_reader_no;
@@ -69,7 +76,12 @@ public class Meter_reader_assignments {
             this.occupancy_type_id = occupancy_type_id;
             this.occupancy_type = occupancy_type;
             this.occupancy_type_code = occupancy_type_code;
-
+            this.city = city;
+            this.city_id = city_id;
+            this.sitio = sitio;
+            this.sitio_id = sitio_id;
+            this.meter_no = meter_no;
+            this.pipe_size=pipe_size;
         }
 
         public String getUpdate_by_id() {
@@ -116,6 +128,12 @@ public class Meter_reader_assignments {
                             + ",occupancy_type_id"
                             + ",occupancy_type"
                             + ",occupancy_type_code"
+                            + ",city"
+                            + ",city_id"
+                            + ",sitio"
+                            + ",sitio_id"
+                            + ",meter_no"
+                            + ",pipe_size"
                             + ")values("
                             + ":meter_reader_id"
                             + ",:meter_reader_no"
@@ -137,6 +155,12 @@ public class Meter_reader_assignments {
                             + ",:occupancy_type_id"
                             + ",:occupancy_type"
                             + ",:occupancy_type_code"
+                            + ",:city"
+                            + ",:city_id"
+                            + ",:sitio"
+                            + ",:sitio_id"
+                            + ",:meter_no"
+                            + ",:pipe_size"
                             + ")";
 
                     s0 = SqlStringUtil.parse(s0)
@@ -160,6 +184,12 @@ public class Meter_reader_assignments {
                             .setString("occupancy_type_id", to_meter_reader_assignments.occupancy_type_id)
                             .setString("occupancy_type", to_meter_reader_assignments.occupancy_type)
                             .setString("occupancy_type_code", to_meter_reader_assignments.occupancy_type_code)
+                            .setString("city", to_meter_reader_assignments.city)
+                            .setString("city_id", to_meter_reader_assignments.city_id)
+                            .setString("sitio", to_meter_reader_assignments.sitio)
+                            .setString("sitio_id", to_meter_reader_assignments.sitio_id)
+                            .setString("meter_no", to_meter_reader_assignments.meter_no)
+                            .setString("pipe_size",to_meter_reader_assignments.pipe_size)
                             .ok();
 
                     PreparedStatement stmt = conn.prepareStatement(s0);
@@ -217,6 +247,12 @@ public class Meter_reader_assignments {
                     + ",occupancy_type_id"
                     + ",occupancy_type"
                     + ",occupancy_type_code"
+                    + ",city"
+                    + ",city_id"
+                    + ",sitio"
+                    + ",sitio_id"
+                    + ",meter_no"
+                    + ",pipe_size"
                     + ")values("
                     + ":meter_reader_id"
                     + ",:meter_reader_no"
@@ -238,6 +274,12 @@ public class Meter_reader_assignments {
                     + ",:occupancy_type_id"
                     + ",:occupancy_type"
                     + ",:occupancy_type_code"
+                    + ",:city"
+                    + ",:city_id"
+                    + ",:sitio"
+                    + ",:sitio_id"
+                    + ",:meter_no"
+                    + ",:pipe_size"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -261,6 +303,12 @@ public class Meter_reader_assignments {
                     .setString("occupancy_type_id", to_meter_reader_assignments.occupancy_type_id)
                     .setString("occupancy_type", to_meter_reader_assignments.occupancy_type)
                     .setString("occupancy_type_code", to_meter_reader_assignments.occupancy_type_code)
+                    .setString("city", to_meter_reader_assignments.city)
+                    .setString("city_id", to_meter_reader_assignments.city_id)
+                    .setString("sitio", to_meter_reader_assignments.sitio)
+                    .setString("sitio_id", to_meter_reader_assignments.sitio_id)
+                    .setString("meter_no", to_meter_reader_assignments.meter_no)
+                    .setString("pipe_size",to_meter_reader_assignments.pipe_size)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -317,6 +365,12 @@ public class Meter_reader_assignments {
                     + ",mra.occupancy_type_id"
                     + ",mra.occupancy_type"
                     + ",mra.occupancy_type_code"
+                    + ",c.city"
+                    + ",c.city_id"
+                    + ",c.sitio"
+                    + ",c.sitio_id"
+                    + ",c.meter_no"
+                    + ",mra.pipe_size"
                     + " from meter_reader_assignments mra "
                     + " left join readings r "
                     + " on r.customer_id=mra.customer_id "
@@ -345,8 +399,13 @@ public class Meter_reader_assignments {
                 String occupancy_type_id = rs.getString(19);
                 String occupancy_type = rs.getString(20);
                 String occupancy_type_code = rs.getString(21);
-
-                to_meter_reader_assignments to = new to_meter_reader_assignments(id, meter_reader_id, meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, barangay, barangay_id, purok, purok_id, date_added, date_updated, added_by_id, update_by_id, status, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code);
+                String city = rs.getString(22);
+                String city_id = rs.getString(23);
+                String sitio = rs.getString(24);
+                String sitio_id = rs.getString(25);
+                String meter_no = rs.getString(26);
+                String pipe_size=rs.getString(27);
+                to_meter_reader_assignments to = new to_meter_reader_assignments(id, meter_reader_id, meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, barangay, barangay_id, purok, purok_id, date_added, date_updated, added_by_id, update_by_id, status, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, city, city_id, sitio, sitio_id, meter_no,pipe_size);
                 datas.add(to);
             }
             return datas;
@@ -365,9 +424,9 @@ public class Meter_reader_assignments {
             String s0 = "select "
                     + " c.id"
                     + ",c.customer_no"
-                    + ",c.fname"
-                    + ",c.mi"
-                    + ",c.lname"
+                    + ",ifnull(c.fname,'')"
+                    + ",ifnull(c.mi,'')"
+                    + ",ifnull(c.lname,'')"
                     + ",c.bday"
                     + ",c.city"
                     + ",c.city_id"
@@ -375,6 +434,8 @@ public class Meter_reader_assignments {
                     + ",c.barangay_id"
                     + ",c.purok"
                     + ",c.purok_id"
+                    + ",c.sitio"
+                    + ",c.sitio_id"
                     + ",c.address"
                     + ",c.balance"
                     + ",ifnull(mra.meter_reader_name,'')"
@@ -382,7 +443,7 @@ public class Meter_reader_assignments {
                     + ",c.date_added"
                     + ",c.date_updated"
                     + ",c.added_by_id"
-                    + ",c.update_by_id"
+                    + ",c.updated_by_id"
                     + ",ifnull(mra.status,0)"
                     + ",c.occupancy_id"
                     + ",c.occupancy"
@@ -398,6 +459,9 @@ public class Meter_reader_assignments {
                     + ",c.contact_mobile"
                     + ",c.contact_email"
                     + ",c.meter_no"
+                    + ",c.meter_description"
+                    + ",c.serial_no"
+                    + ",c.pipe_size"
                     + " from customers c "
                     + " left join meter_reader_assignments mra "
                     + " on c.id = mra.customer_id "
@@ -418,30 +482,38 @@ public class Meter_reader_assignments {
                 String barangay_id = rs.getString(10);
                 String purok = rs.getString(11);
                 String purok_id = rs.getString(12);
-                String address = rs.getString(13);
-                double balance = rs.getDouble(14);
-                String tax_dec_no = rs.getString(15);
-                int meter_is_paid = rs.getInt(16);
-                String date_added = rs.getString(17);
-                String date_updated = rs.getString(18);
-                String added_by_id = rs.getString(19);
-                String update_by_id = rs.getString(20);
-                int status = rs.getInt(21);
-                String occupancy_id = rs.getString(22);
-                String occupancy = rs.getString(23);
-                String occupancy_type_id = rs.getString(24);
-                String occupancy_type = rs.getString(25);
-                String occupancy_type_code = rs.getString(26);
-                String gender = rs.getString(27);
-                String religion = rs.getString(28);
-                String height = rs.getString(29);
-                String weight = rs.getString(30);
-                String civil_status = rs.getString(31);
-                String contact_landline = rs.getString(32);
-                String contact_mobile = rs.getString(33);
-                String contact_email = rs.getString(34);
-                String meter_no = rs.getString(35);
-                Customers.to_customers to = new Customers.to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, update_by_id, status, false, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no);
+                String sitio = rs.getString(13);
+                String sitio_id = rs.getString(14);
+                String address = rs.getString(15);
+                double balance = rs.getDouble(16);
+
+                String tax_dec_no = rs.getString(17);
+                int meter_is_paid = rs.getInt(18);
+                String date_added = rs.getString(19);
+                String date_updated = rs.getString(20);
+                String added_by_id = rs.getString(21);
+                String updated_by_id = rs.getString(22);
+                int status = rs.getInt(23);
+
+                String occupancy_id = rs.getString(24);
+                String occupancy = rs.getString(25);
+                String occupancy_type_id = rs.getString(26);
+                String occupancy_type = rs.getString(27);
+                String occupancy_type_code = rs.getString(28);
+                String gender = rs.getString(29);
+                String religion = rs.getString(30);
+                String height = rs.getString(31);
+                String weight = rs.getString(32);
+                String civil_status = rs.getString(33);
+                String contact_landline = rs.getString(34);
+                String contact_mobile = rs.getString(35);
+                String contact_email = rs.getString(36);
+                String meter_no = rs.getString(37);
+                String meter_description = rs.getString(38);
+                String serial_no = rs.getString(39);
+                boolean selected = false;
+                String pipe_size=rs.getString(40);
+                to_customers to = new to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, sitio, sitio_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, updated_by_id, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no, meter_description, serial_no, status, selected,pipe_size);
                 datas.add(to);
             }
             return datas;
@@ -479,6 +551,12 @@ public class Meter_reader_assignments {
                     + ",occupancy_type_id"
                     + ",occupancy_type"
                     + ",occupancy_type_code"
+                    + ",city"
+                    + ",city_id"
+                    + ",sitio"
+                    + ",sitio_id"
+                    + ",meter_no"
+                    + ",pipe_size"
                     + " from meter_reader_assignments"
                     + " " + where;
 
@@ -506,8 +584,13 @@ public class Meter_reader_assignments {
                 String occupancy_type_id = rs.getString(19);
                 String occupancy_type = rs.getString(20);
                 String occupancy_type_code = rs.getString(21);
-
-                to_meter_reader_assignments to = new to_meter_reader_assignments(id, meter_reader_id, meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, barangay, barangay_id, purok, purok_id, date_added, date_updated, added_by_id, update_by_id, status, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code);
+                String city = rs.getString(22);
+                String city_id = rs.getString(23);
+                String sitio = rs.getString(24);
+                String sitio_id = rs.getString(25);
+                String meter_no = rs.getString(26);
+                String pipe_size=rs.getString(27);
+                to_meter_reader_assignments to = new to_meter_reader_assignments(id, meter_reader_id, meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, barangay, barangay_id, purok, purok_id, date_added, date_updated, added_by_id, update_by_id, status, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, city, city_id, sitio, sitio_id, meter_no,pipe_size);
                 datas.add(to);
             }
             return datas;

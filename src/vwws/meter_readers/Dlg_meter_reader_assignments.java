@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
-import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
@@ -28,7 +28,10 @@ import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.DateType;
 import synsoftech.util.ImageRenderer;
+import vwws.barangays.Barangays;
+import vwws.cities.Cities;
 import vwws.customers.Customers;
+import vwws.util.Alert;
 import vwws.util.MyUser;
 import vwws.util.TableRenderer;
 
@@ -218,6 +221,20 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
         jButton1 = new Button.Success();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jTextField3 = new Field.Combo();
+        jTextField4 = new Field.Combo();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField5 = new Field.Combo();
+        jTextField6 = new Field.Combo();
+        jLabel14 = new javax.swing.JLabel();
+        jButton2 = new Button.Default();
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/man216 (1).png"))); // NOI18N
         jMenuItem1.setText("Meter Reader");
@@ -262,7 +279,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/teamwork2.png"))); // NOI18N
         jLabel2.setText("Meter Reader Assigments");
 
-        jLabel4.setText("Total No of Customers:");
+        jLabel4.setText("Total No. of Accounts:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("0");
@@ -271,6 +288,11 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
             }
         });
 
@@ -299,6 +321,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         });
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -308,14 +331,29 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox2.setSelected(true);
         jCheckBox2.setText("All");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jCheckBox3);
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox3.setText("Assigned");
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jCheckBox4);
         jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox4.setText("Not Assigned");
+        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -324,17 +362,137 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("City/Municipality:");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Barangay:");
+
+        jCheckBox5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox5.setText("All");
+
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("All");
+
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField3MouseClicked(evt);
+            }
+        });
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField4MouseClicked(evt);
+            }
+        });
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox7.setSelected(true);
+        jCheckBox7.setText("All");
+
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox8.setSelected(true);
+        jCheckBox8.setText("All");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Sitio:");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Purok:");
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Search Name:");
+
+        jButton2.setText("+ Select all");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jCheckBox3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTextField1))
+                        .addGap(113, 113, 113))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                        .addGap(1, 1, 1)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField3)
+                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel13))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jCheckBox7))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBox8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField5)
+                                    .addComponent(jTextField6)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -346,28 +504,8 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox1)
-                                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox4))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(125, 125, 125)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(388, 388, 388)))))
                 .addGap(25, 25, 25))
         );
         jPanel3Layout.setVerticalGroup(
@@ -382,19 +520,45 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
                     .addComponent(jCheckBox3)
                     .addComponent(jCheckBox4))
                 .addGap(1, 1, 1)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1))
-                        .addGap(2, 2, 2)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCheckBox7)
+                        .addGap(1, 1, 1)
+                        .addComponent(jCheckBox8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jCheckBox5)
+                        .addGap(1, 1, 1)
+                        .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -459,6 +623,42 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         init_readers();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
+        init_cities(jTextField3);
+    }//GEN-LAST:event_jTextField3MouseClicked
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        init_cities(jTextField3);
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MouseClicked
+        init_barangay(jTextField4);
+    }//GEN-LAST:event_jTextField4MouseClicked
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        init_barangay(jTextField4);
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+        data_cols_customers();
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
+
+    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+        data_cols_customers();
+    }//GEN-LAST:event_jCheckBox4ActionPerformed
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        data_cols_customers();
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        select_all_accounts();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,11 +666,21 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -486,6 +696,10 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTable tbl_customers;
     // End of variables declaration//GEN-END:variables
 
@@ -499,6 +713,98 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
 
         String search = "";
         meter_readers = Meter_readers.ret_data(search);
+        cities = Cities.ret_data("");
+        barangays = Barangays.ret_data(" order by barangay asc ");
+
+        set_default();
+        set_default_location();
+    }
+
+    private void set_default_location() {
+        List<Cities.to_cities> cts = cities;
+        List<Barangays.to_barangays> bar = barangays;
+        if (!bar.isEmpty()) {
+            Barangays.to_barangays b = (Barangays.to_barangays) bar.get(0);
+            Field.Combo tfs = (Field.Combo) jTextField4;
+            tfs.setText(b.barangay);
+            tfs.setId("" + b.id);
+        }
+
+        for (Cities.to_cities c : cts) {
+            if (c.is_default == 1) {
+                Field.Combo tfs = (Field.Combo) jTextField3;
+                tfs.setText(c.city);
+                tfs.setId("" + c.id);
+                break;
+            }
+        }
+    }
+    List<Cities.to_cities> cities = new ArrayList();
+
+    private void init_cities(final JTextField tf) {
+
+        Object[][] obj = new Object[cities.size()][1];
+        int i = 0;
+        for (Cities.to_cities to : cities) {
+            obj[i][0] = " " + to.city;
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf.getWidth()};
+        int width = 0;
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(tf, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Field.Combo tfs = (Field.Combo) tf;
+                Cities.to_cities to = cities.get(data.selected_row);
+                tfs.setText(to.city);
+                tfs.setId("" + to.id);
+                data_cols_customers();
+            }
+        });
+    }
+    List<Barangays.to_barangays> barangays = new ArrayList();
+
+    private void init_barangay(final JTextField tf) {
+
+        Object[][] obj = new Object[barangays.size()][1];
+        int i = 0;
+        for (Barangays.to_barangays to : barangays) {
+            obj[i][0] = " " + to.barangay;
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf.getWidth()};
+        int width = 0;
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(tf, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Field.Combo tfs = (Field.Combo) tf;
+                Barangays.to_barangays to = barangays.get(data.selected_row);
+                tfs.setText(to.barangay);
+                tfs.setId("" + to.id);
+                data_cols_customers();
+            }
+        });
+    }
+
+    private void set_default() {
+        List<Meter_readers.to_meter_readers> readers = meter_readers;
+        if (!readers.isEmpty()) {
+            Meter_readers.to_meter_readers reader = (Meter_readers.to_meter_readers) readers.get(0);
+            Field.Combo tf = (Field.Combo) jTextField1;
+
+            jTextField1.setText(reader.lname + ", " + reader.fname + " " + reader.mi);
+            tf.setId("" + reader.id);
+        }
     }
 
     public void do_pass() {
@@ -514,12 +820,12 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -534,7 +840,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         tbl_customers.setModel(tbl_customers_M);
         tbl_customers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_customers.setRowHeight(25);
-        int[] tbl_widths_customers = {80, 150, 200, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_customers = {80, 150, 200, 200, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_customers.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -547,7 +853,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         tbl_customers.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_customers.setRowHeight(25);
         tbl_customers.setFont(new java.awt.Font("Arial", 0, 12));
-        tbl_customers.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer());
+        tbl_customers.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_customers(List<Customers.to_customers> acc) {
@@ -558,7 +864,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
     public static class TblcustomersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "ID #", "Name", "Reader", "", "", "bday", "city", "city_id", "barangay", "barangay_id", "purok", "purok_id", "address", "balance", "tax_dec_no", "meter_is_paid", "date_added", "date_updated", "added_by_id", "update_by_id", "status"
+            "ID #", "Name", "Reader", "Barangay", "", "", "city", "city_id", "barangay", "barangay_id", "purok", "purok_id", "address", "balance", "tax_dec_no", "meter_is_paid", "date_added", "date_updated", "added_by_id", "update_by_id", "status"
         };
 
         public TblcustomersModel(ListModel listmodel) {
@@ -573,7 +879,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 4) {
+            if (col == 5) {
                 return Boolean.class;
             }
             return Object.class;
@@ -590,15 +896,15 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
                 case 2:
                     return " " + tt.tax_dec_no;
                 case 3:
+                    return " " + tt.barangay;
+                case 4:
                     if (tt.status == 1) {
                         return "/vwws/icons/check.png";
                     } else {
                         return "/vwws/icons/delete.png";
                     }
-                case 4:
-                    return tt.selected;
                 case 5:
-                    return tt.bday;
+                    return tt.selected;
                 case 6:
                     return tt.city;
                 case 7:
@@ -626,7 +932,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
                 case 18:
                     return tt.added_by_id;
                 case 19:
-                    return tt.update_by_id;
+                    return tt.bday;
                 default:
                     return tt.status;
             }
@@ -635,15 +941,40 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
 
     private void data_cols_customers() {
         Field.Combo reader = (Field.Combo) jTextField1;
-        String where = " where concat(c.lname,space(1),c.fname,space(1),c.mi) like '%" + jTextField2.getText() + "%' ";
+//        String where = " where concat(c.lname,space(1),c.fname,space(1),c.mi) like '%" + jTextField2.getText() + "%' ";
+
+        Field.Combo city = (Field.Combo) jTextField3;
+        Field.Combo barangay = (Field.Combo) jTextField4;
+        Field.Combo purok = (Field.Combo) jTextField5;
+        Field.Combo sitio = (Field.Combo) jTextField6;
+        String where = " where c.tax_dec_no like '%%' ";
+        if (!jCheckBox5.isSelected()) {
+            where = where + " and c.city_id='" + city.getId() + "' ";
+            if (!jCheckBox6.isSelected()) {
+                where = where + " and c.barangay_id='" + barangay.getId() + "' ";
+                if (!jCheckBox7.isSelected()) {
+                    where = where + " and c.purok_id='" + purok.getId() + "' ";
+                    if (!jCheckBox8.isSelected()) {
+                        where = where + " and c.sitio_id='" + sitio.getId() + "' ";
+                    }
+                }
+            }
+        }
         if (jCheckBox3.isSelected()) {
-            where = where + " and mra.status='" + "1" + "' ";
+            where = where + " and mra.status='" + "0" + "' ";
         }
         if (jCheckBox4.isSelected()) {
             where = where + " and mra.status IS NULL ";
         }
         if (!jCheckBox1.isSelected()) {
             where = where + " and mra.meter_reader_id= '" + reader.getId() + "' ";
+        }
+
+        String search = jTextField2.getText();
+        if (!search.isEmpty()) {
+            String where2 = where.replace("where", "");
+            where = where + " and (concat(c.fname,'',c.lname)) like '%" + search + "%' or " + where2 + " and (concat(c.lname,'',c.fname)) like '%" + search + "%'";
+
         }
         System.out.println(where);
         List<Customers.to_customers> datas = Meter_reader_assignments.ret_customers(where);
@@ -652,6 +983,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         int assigned = 0;
 
         for (Customers.to_customers to : datas) {
+
             if (to.status == 0) {
                 not_assigned++;
             } else {
@@ -675,7 +1007,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         }
         int col = tbl_customers.getSelectedColumn();
         Customers.to_customers to = (Customers.to_customers) tbl_customers_ALM.get(row);
-        if (col == 4) {
+        if (col == 5) {
             if (to.selected == true) {
                 to.setSelected(false);
             } else {
@@ -710,7 +1042,7 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
                 Meter_readers.to_meter_readers to = meter_readers.get(data.selected_row);
                 jTextField1.setText(to.lname + ", " + to.fname + " " + to.mi);
                 tf.setId("" + to.id);
-
+                data_cols_customers();
             }
         });
     }
@@ -747,23 +1079,28 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
                         String date_updated = DateType.now();
                         String added_by_id = MyUser.getUser_id();
                         String update_by_id = MyUser.getUser_id();
-                        int status = 0;
-                        String occupancy_id=customer.occupancy_id;
-                        String occupancy=customer.occupancy;
-                        String occupancy_type_id=customer.occupancy_type_id;
-                        String occupancy_type=customer.occupancy_type;
-                        String occupancy_type_code=customer.occupancy_type_code;
-                        
-                        Meter_reader_assignments.to_meter_reader_assignments to = new Meter_reader_assignments.to_meter_reader_assignments(id, meter_reader_id
-                                , meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, barangay, barangay_id, purok, purok_id
-                                , date_added, date_updated, added_by_id, update_by_id, status,occupancy_id,occupancy,occupancy_type_id,occupancy_type,occupancy_type_code);
+                        int status = 1;
+                        String occupancy_id = customer.occupancy_id;
+                        String occupancy = customer.occupancy;
+                        String occupancy_type_id = customer.occupancy_type_id;
+                        String occupancy_type = customer.occupancy_type;
+                        String occupancy_type_code = customer.occupancy_type_code;
+                        String city = customer.city;
+                        String city_id = customer.city_id;
+                        String sitio = customer.sitio;
+                        String sitio_id = customer.sitio_id;
+                        String meter_no = customer.meter_no;
+                        String pipe_size=customer.pipe_size;
+                        Meter_reader_assignments.to_meter_reader_assignments to = new Meter_reader_assignments.to_meter_reader_assignments(id, meter_reader_id,
+                                                                                                                                           meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, barangay, barangay_id, purok, purok_id,
+                                                                                                                                           date_added, date_updated, added_by_id, update_by_id, status, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, city, city_id, sitio, sitio_id, meter_no,pipe_size);
 
                         selected.add(to);
                     }
                 }
 
                 Meter_reader_assignments.add_data(selected);
-
+                Alert.set(1, "");
                 data_cols_customers();
             }
         });
@@ -777,4 +1114,21 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
         }
     }
 
+    private void select_all_accounts() {
+        if (jButton2.getText().equalsIgnoreCase("+ Select all")) {
+            jButton2.setText("- Deselect all");
+        } else {
+            jButton2.setText("+ Select all");
+        }
+
+        List<Customers.to_customers> datas = tbl_customers_ALM;
+        for (Customers.to_customers cust : datas) {
+            if (jButton2.getText().equalsIgnoreCase("+ Select all")) {
+                cust.setSelected(false);
+            } else {
+                cust.setSelected(true);
+            }
+        }
+        tbl_customers_M.fireTableDataChanged();
+    }
 }

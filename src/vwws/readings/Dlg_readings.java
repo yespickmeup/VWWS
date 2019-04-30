@@ -28,6 +28,7 @@ import synsoftech.fields.Field;
 import synsoftech.fields.Label;
 import synsoftech.util.DateType;
 import synsoftech.util.ImageRenderer;
+import vwws.customers.Customers;
 import vwws.meter_readers.Meter_reader_assignments;
 import vwws.meter_readers.Meter_readers;
 import vwws.util.DatePrevious;
@@ -432,7 +433,7 @@ public class Dlg_readings extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-       sync();
+        sync();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
@@ -481,12 +482,12 @@ public class Dlg_readings extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -609,6 +610,8 @@ public class Dlg_readings extends javax.swing.JDialog {
             return;
         }
         final Meter_reader_assignments.to_meter_reader_assignments to = (Meter_reader_assignments.to_meter_reader_assignments) tbl_customers_ALM.get(row);
+        List<Customers.to_customers> customers = Customers.ret_data(" where id='" + to.customer_id + "' ");
+        final Customers.to_customers customer = (Customers.to_customers) customers.get(0);
 
         Window p = (Window) this;
         Dlg_readings_add nd = Dlg_readings_add.create(p, true);
@@ -627,7 +630,7 @@ public class Dlg_readings extends javax.swing.JDialog {
             for (Readings.to_readings r : field) {
                 previous_reading = r.previous_reading;
                 current_reading = r.current_reading;
-                current_reading_date = DateType.convert_slash_datetime(r.date_added);
+                current_reading_date = DateType.convert_slash_datetime(r.created_at);
                 prev_reading_date = DateType.convert_slash_datetime(r.previous_reading_date);
             }
 
@@ -646,7 +649,7 @@ public class Dlg_readings extends javax.swing.JDialog {
             for (Readings.to_readings r : field) {
                 previous_reading = r.current_reading;
                 current_reading = r.current_reading;
-                prev_reading_date = DateType.convert_slash_datetime(r.date_added);
+                prev_reading_date = DateType.convert_slash_datetime(r.created_at);
             }
 
             nd.do_pass2(previous_reading, prev_reading_date);
@@ -658,80 +661,72 @@ public class Dlg_readings extends javax.swing.JDialog {
                 closeDialog.ok();
                 Field.Combo reader = (Field.Combo) tf_fname;
                 int id = 0;
-                String meter_reader_id = reader.getId();
-                String meter_reader_no = "";
-                String meter_reader_name = reader.getText();
+                String meter_reader_id = to.meter_reader_id;
+                String meter_reader_no = to.meter_reader_no;
+                String meter_reader_name = to.meter_reader_name;
                 String customer_id = to.customer_id;
                 String customer_no = to.customer_no;
                 String customer_name = to.customer_name;
-                String customer_tax_dec_no = "";
+                String customer_tax_dec_no = customer.tax_dec_no;
+                String previous_reading_date = null;
                 double previous_reading = data.previous_reading;
                 double current_reading = data.current_reading;
-                String city = "";
-                String city_id = "";
-                String barangay = to.barangay;
-                String barangay_id = to.barangay_id;
-                String purok = to.purok;
-                String purok_id = to.purok_id;
-                String address = "";
-//                String date_added = DateType.now();
-//                String date_updated = DateType.now();
-                String date_added = DateType.sf.format(jDateChooser1.getDate());
-                String date_updated = DateType.sf.format(jDateChooser1.getDate());
-                String added_by_id = MyUser.getUser_id();
-                String update_by_id = MyUser.getUser_id();
-                int status = 0;
-                String my_occupancy_id = to.occupancy_id;
-                String my_occupancy = to.occupancy;
-                String my_occupancy_type_id = to.occupancy_type_id;
-                String my_occupancy_type = to.occupancy_type;
-                String my_occupancy_type_code = to.occupancy_type_code;
-                String previous_reading_date = data.previous_reading_date;
+                String city = customer.city;
+                String city_id = customer.city_id;
+                String barangay = customer.barangay;
+                String barangay_id = customer.barangay_id;
+                String purok = customer.purok;
+                String purok_id = customer.purok_id;
+                String address = customer.address;
+                int status = 1;
+                String reading_no = Readings.increment_id();
+                List<Readings.to_readings> reads = Readings.ret_data(" where reading_no='" + reading_no + "' ");
+                if (!reads.isEmpty()) {
+                    System.out.println("Reading no exists!");
+                    add_reading();
+                }
+
+                String customer_meter_no = customer.meter_no;
+
+                String sitio = customer.sitio;
+                String sitio_id = customer.sitio_id;
+                String created_at = DateType.sf.format(jDateChooser1.getDate());;
+                String updated_at = DateType.sf.format(jDateChooser1.getDate());;
+                String created_by = MyUser.getUser_id();
+                String updated_by = MyUser.getUser_id();
+
+                String occupancy_id = customer.occupancy_id;
+                String occupancy = customer.occupancy;
+                String occupancy_type_id = customer.occupancy_type_id;
+                String occupancy_type = customer.occupancy_type;
+                String occupancy_type_code = customer.occupancy_type_code;
+                double actual_consumption = current_reading - previous_reading;
+                double amount_due = 0;
+                double mf = 0;
+                double mr = 0;
+                double interest = 0;
+                double discount = 0;
+                double net_due = 0;
                 int is_paid = 0;
                 String or_id = "";
                 String or_no = "";
-                Readings.to_readings to1 = new Readings.to_readings(id, meter_reader_id, meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, customer_tax_dec_no, previous_reading, current_reading, city, city_id, barangay, barangay_id, purok, purok_id, address, date_added, date_updated, added_by_id, update_by_id, status, false, my_occupancy_id, my_occupancy, my_occupancy_type_id, my_occupancy_type, my_occupancy_type_code, previous_reading_date, is_paid, or_id, or_no, 0, 0, 0, 0);
+                String date_uploaded = null;
+                int is_uploaded = 0;
+                boolean selected = false;
+
+                Readings.to_readings to1 = new Readings.to_readings(id, reading_no, meter_reader_id, meter_reader_name, customer_id, customer_no, customer_name, customer_meter_no, previous_reading_date, previous_reading, current_reading, city, city_id, barangay, barangay_id, purok, purok_id, sitio, sitio_id, created_at, updated_at, created_by, updated_by, status, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, actual_consumption, amount_due, mf, mr, interest, discount, net_due, is_paid, or_id, or_no, date_uploaded, is_uploaded, selected);
+
                 Readings.add_data(to1);
-//                if (to.status == 0) {
-//
-//                } else {
-//                    int id = FitIn.toInt(to.update_by_id);
-//                    String meter_reader_id = reader.getId();
-//                    String meter_reader_no = "";
-//                    String meter_reader_name = reader.getText();
-//                    String customer_id = "" + to.id;
-//                    String customer_no = to.customer_no;
-//                    String customer_name = to.customer_name;
-//                    String customer_tax_dec_no = "";
-//                    double previous_reading = data.previous_reading;
-//                    double current_reading = data.current_reading;
-//                    String city = "";
-//                    String city_id = "";
-//                    String barangay = to.barangay;
-//                    String barangay_id = to.barangay_id;
-//                    String purok = to.purok;
-//                    String purok_id = to.purok_id;
-//                    String address = "";
-//                    String date_added = DateType.now();
-//                    String date_updated = DateType.now();
-//                    String added_by_id = MyUser.getUser_id();
-//                    String update_by_id = MyUser.getUser_id();
-//                    int status = 1;
-//                    String my_occupancy_id = to.occupancy_id;
-//                    String my_occupancy = to.occupancy;
-//                    String my_occupancy_type_id = to.occupancy_type_id;
-//                    String my_occupancy_type = to.occupancy_type;
-//                    String my_occupancy_type_code = to.occupancy_type_code;
-//                    Readings.to_readings to1 = new Readings.to_readings(id, meter_reader_id, meter_reader_no, meter_reader_name, customer_id, customer_no, customer_name, customer_tax_dec_no, previous_reading, current_reading, city, city_id, barangay, barangay_id, purok, purok_id, address, date_added, date_updated, added_by_id, update_by_id, status, false, my_occupancy_id, my_occupancy, my_occupancy_type_id, my_occupancy_type, my_occupancy_type_code);
-//                    Readings.update_reading(to1);
-//                }
 
                 data_cols_customers();
             }
 
-        });
+        }
+        );
         nd.setLocationRelativeTo(jScrollPane1);
-        nd.setVisible(true);
+
+        nd.setVisible(
+                true);
     }
 
     List<Meter_readers.to_meter_readers> meter_readers = new ArrayList();

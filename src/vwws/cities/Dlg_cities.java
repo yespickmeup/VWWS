@@ -485,8 +485,9 @@ public class Dlg_cities extends javax.swing.JDialog {
         String date_updated = DateType.now();
         String added_by_id = MyUser.getUser_id();
         String update_by_id = MyUser.getUser_id();
-
-        to_cities to = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, 0);
+        int status=1;
+        int is_default=0;
+        to_cities to = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, 0,status,is_default);
         Cities.add_data(to);
         data_cols();
         tf_city.setText("");
@@ -517,8 +518,9 @@ public class Dlg_cities extends javax.swing.JDialog {
         String date_updated = DateType.now();
         String added_by_id = to.added_by_id;
         String update_by_id = MyUser.getUser_id();
-
-        to_cities to1 = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, 0);
+        int status=1;
+        int is_default=0;
+        to_cities to1 = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, 0,status,is_default);
         Cities.update_data(to1);
         data_cols();
         tf_city.setText("");

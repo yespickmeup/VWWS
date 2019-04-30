@@ -213,7 +213,6 @@ public class Dlg_barangays extends javax.swing.JDialog {
         tf_city2 = new Field.Combo();
         jLabel6 = new javax.swing.JLabel();
         tf_city3 = new Field.Search();
-        jLabel7 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton6 = new Button.Search();
 
@@ -315,10 +314,6 @@ public class Dlg_barangays extends javax.swing.JDialog {
 
         tf_city3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/search67.png"))); // NOI18N
-        jLabel7.setText("Search");
-
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
@@ -338,15 +333,12 @@ public class Dlg_barangays extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -360,7 +352,7 @@ public class Dlg_barangays extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tf_city))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 120, Short.MAX_VALUE)
+                                .addGap(0, 425, Short.MAX_VALUE)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -383,7 +375,7 @@ public class Dlg_barangays extends javax.swing.JDialog {
                                         .addComponent(tf_city2)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(23, 23, 23))))
+                        .addGap(25, 25, 25))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,9 +396,7 @@ public class Dlg_barangays extends javax.swing.JDialog {
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -418,7 +408,7 @@ public class Dlg_barangays extends javax.swing.JDialog {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_city3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -502,7 +492,6 @@ public class Dlg_barangays extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbl_barangays;
@@ -516,8 +505,23 @@ public class Dlg_barangays extends javax.swing.JDialog {
         init_key();
         cities = Cities.ret_data("");
 
+        set_default_location();
+
         init_tbl_barangays(tbl_barangays);
         data_cols();
+
+    }
+
+    private void set_default_location() {
+        List<Cities.to_cities> cts = cities;
+        for (Cities.to_cities c : cts) {
+            if (c.is_default == 1) {
+                Field.Combo tfs = (Field.Combo) tf_city;
+                tfs.setText(c.city);
+                tfs.setId("" + c.id);
+                break;
+            }
+        }
     }
 
     public void do_pass() {
@@ -533,12 +537,12 @@ public class Dlg_barangays extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -552,7 +556,7 @@ public class Dlg_barangays extends javax.swing.JDialog {
         tbl_barangays.setModel(tbl_barangays_M);
         tbl_barangays.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_barangays.setRowHeight(25);
-        int[] tbl_widths_barangays = {100, 100, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_barangays = {100, 180, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_barangays.length; i < n; i++) {
             if (i == 0) {
                 continue;
@@ -575,7 +579,7 @@ public class Dlg_barangays extends javax.swing.JDialog {
     public static class TblbarangaysModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Barangay", "City", "city", "barangay", "date_added", "date_updated", "added_by_id", "update_by_id"
+            "Barangay", "City/Municipality", "city", "barangay", "date_added", "date_updated", "added_by_id", "update_by_id"
         };
 
         public TblbarangaysModel(ListModel listmodel) {
@@ -734,4 +738,5 @@ public class Dlg_barangays extends javax.swing.JDialog {
         tf_barangay.setText("");
 
     }
+    
 }

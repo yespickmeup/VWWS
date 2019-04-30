@@ -249,4 +249,60 @@ public class Occupancy_types {
         }
     }
 
+    public static List<to_occupancy_types> ret_data2(String where) {
+        List<to_occupancy_types> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",concat(occupancy_type_code,'-',occupancy) as occupancy"
+                    + ",occupancy_type_id"
+                    + ",occupancy_type_name"
+                    + ",occupancy_type_code"
+                    + ",pipe_size"
+                    + ",cubic"
+                    + ",mf"
+                    + ",mr"
+                    + ",charge"
+                    + ",date_added"
+                    + ",date_updated"
+                    + ",added_by_id"
+                    + ",update_by_id"
+                    + ",status"
+                    + ",remarks"
+                    + " from occupancy_types"
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String occupancy = rs.getString(2);
+                String occupancy_type_id = rs.getString(3);
+                String occupancy_type_name = rs.getString(4);
+                String occupancy_type_code = rs.getString(5);
+                String pipe_size = rs.getString(6);
+                String cubic = rs.getString(7);
+                double mf = rs.getDouble(8);
+                double mr = rs.getDouble(9);
+                double charge = rs.getDouble(10);
+                String date_added = rs.getString(11);
+                String date_updated = rs.getString(12);
+                String added_by_id = rs.getString(13);
+                String update_by_id = rs.getString(14);
+                int status = rs.getInt(15);
+                String remarks = rs.getString(16);
+
+                to_occupancy_types to = new to_occupancy_types(id, occupancy, occupancy_type_id, occupancy_type_name, occupancy_type_code, pipe_size, cubic, mf, mr, charge, date_added, date_updated, added_by_id, update_by_id, status, remarks);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+    
 }

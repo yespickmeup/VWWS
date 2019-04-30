@@ -48,16 +48,19 @@ public class Rpt_ar_aging {
         String date_applied;
         String transaction_no;
         String days;
-        String one;
-        String two;
-        String three;
-        String four;
-        String five;
+        double one;
+        double two;
+        double three;
+        double four;
+        double five;
+        String meter_no;
+        String barangay;
+        String type;
 
         public field() {
         }
 
-        public field(String customer_no, String customer_name, String date_applied, String transaction_no, String days, String one, String two, String three, String four, String five) {
+        public field(String customer_no, String customer_name, String date_applied, String transaction_no, String days, double one, double two, double three, double four, double five, String meter_no, String barangay, String type) {
             this.customer_no = customer_no;
             this.customer_name = customer_name;
             this.date_applied = date_applied;
@@ -68,6 +71,9 @@ public class Rpt_ar_aging {
             this.three = three;
             this.four = four;
             this.five = five;
+            this.meter_no = meter_no;
+            this.barangay = barangay;
+            this.type = type;
         }
 
         public String getCustomer_no() {
@@ -110,45 +116,70 @@ public class Rpt_ar_aging {
             this.days = days;
         }
 
-        public String getOne() {
+        public double getOne() {
             return one;
         }
 
-        public void setOne(String one) {
+        public void setOne(double one) {
             this.one = one;
         }
 
-        public String getTwo() {
+        public double getTwo() {
             return two;
         }
 
-        public void setTwo(String two) {
+        public void setTwo(double two) {
             this.two = two;
         }
 
-        public String getThree() {
+        public double getThree() {
             return three;
         }
 
-        public void setThree(String three) {
+        public void setThree(double three) {
             this.three = three;
         }
 
-        public String getFour() {
+        public double getFour() {
             return four;
         }
 
-        public void setFour(String four) {
+        public void setFour(double four) {
             this.four = four;
         }
 
-        public String getFive() {
+        public double getFive() {
             return five;
         }
 
-        public void setFive(String five) {
+        public void setFive(double five) {
             this.five = five;
         }
+
+        public String getMeter_no() {
+            return meter_no;
+        }
+
+        public void setMeter_no(String meter_no) {
+            this.meter_no = meter_no;
+        }
+
+        public String getBarangay() {
+            return barangay;
+        }
+
+        public void setBarangay(String barangay) {
+            this.barangay = barangay;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
     }
 
     public static void main(String[] args) {
@@ -188,13 +219,14 @@ public class Rpt_ar_aging {
             Connection conn = MyConnection.connect();
             String s0 = "select "
                     + "id"
+                    + ",reading_no"
                     + ",meter_reader_id"
-                    + ",meter_reader_no"
                     + ",meter_reader_name"
                     + ",customer_id"
                     + ",customer_no"
                     + ",customer_name"
-                    + ",customer_tax_dec_no"
+                    + ",customer_meter_no"
+                    + ",previous_reading_date"
                     + ",previous_reading"
                     + ",current_reading"
                     + ",city"
@@ -203,21 +235,30 @@ public class Rpt_ar_aging {
                     + ",barangay_id"
                     + ",purok"
                     + ",purok_id"
-                    + ",address"
-                    + ",date_added"
-                    + ",date_updated"
-                    + ",added_by_id"
-                    + ",update_by_id"
+                    + ",sitio"
+                    + ",sitio_id"
+                    + ",created_at"
+                    + ",updated_at"
+                    + ",created_by"
+                    + ",updated_by"
                     + ",status"
                     + ",occupancy_id"
                     + ",occupancy"
                     + ",occupancy_type_id"
                     + ",occupancy_type"
                     + ",occupancy_type_code"
-                    + ",previous_reading_date"
+                    + ",actual_consumption"
+                    + ",amount_due"
+                    + ",mf"
+                    + ",mr"
+                    + ",interest"
+                    + ",discount"
+                    + ",net_due"
                     + ",is_paid"
                     + ",or_id"
                     + ",or_no"
+                    + ",date_uploaded"
+                    + ",is_uploaded"
                     + " from readings"
                     + " " + where;
 
@@ -225,86 +266,80 @@ public class Rpt_ar_aging {
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
                 int id = rs.getInt(1);
-                String meter_reader_id = rs.getString(2);
-                String meter_reader_no = rs.getString(3);
+                String reading_no = rs.getString(2);
+                String meter_reader_id = rs.getString(3);
                 String meter_reader_name = rs.getString(4);
                 String customer_id = rs.getString(5);
                 String customer_no = rs.getString(6);
                 String customer_name = rs.getString(7);
-                String customer_tax_dec_no = rs.getString(8);
-                double previous_reading = rs.getDouble(9);
-                double current_reading = rs.getDouble(10);
-                String city = rs.getString(11);
-                String city_id = rs.getString(12);
-                String barangay = rs.getString(13);
-                String barangay_id = rs.getString(14);
-                String purok = rs.getString(15);
-                String purok_id = rs.getString(16);
-                String address = rs.getString(17);
-                String date_added = rs.getString(18);
-                String date_updated = rs.getString(19);
-                String added_by_id = rs.getString(20);
-                String update_by_id = rs.getString(21);
-                int status = rs.getInt(22);
-                String occupancy_id = rs.getString(23);
-                String occupancy = rs.getString(24);
-                String occupancy_type_id = rs.getString(25);
-                String occupancy_type = rs.getString(26);
-                String occupancy_type_code = rs.getString(27);
-                String previous_reading_date = rs.getString(28);
-                int is_paid = rs.getInt(29);
-                String or_id = rs.getString(30);
-                String or_no = rs.getString(31);
-
-                String date_applied = DateType.convert_slash_datetime(date_added);
+                String customer_meter_no = rs.getString(8);
+                String previous_reading_date = rs.getString(9);
+                double previous_reading = rs.getDouble(10);
+                double current_reading = rs.getDouble(11);
+                String city = rs.getString(12);
+                String city_id = rs.getString(13);
+                String barangay = rs.getString(14);
+                String barangay_id = rs.getString(15);
+                String purok = rs.getString(16);
+                String purok_id = rs.getString(17);
+                String sitio = rs.getString(18);
+                String sitio_id = rs.getString(19);
+                String created_at = rs.getString(20);
+                String updated_at = rs.getString(21);
+                String created_by = rs.getString(22);
+                String updated_by = rs.getString(23);
+                int status = rs.getInt(24);
+                String occupancy_id = rs.getString(25);
+                String occupancy = rs.getString(26);
+                String occupancy_type_id = rs.getString(27);
+                String occupancy_type = rs.getString(28);
+                String occupancy_type_code = rs.getString(29);
+                double actual_consumption = rs.getDouble(30);
+                double amount_due = rs.getDouble(31);
+                double mf = rs.getDouble(32);
+                double mr = rs.getDouble(33);
+                double interest = rs.getDouble(34);
+                double discount = rs.getDouble(35);
+                double net_due = rs.getDouble(36);
+                int is_paid = rs.getInt(37);
+                String or_id = rs.getString(38);
+                String or_no = rs.getString(39);
+                String date_uploaded = rs.getString(40);
+                int is_uploaded = rs.getInt(41);
+                String date_applied = DateType.convert_slash_datetime(created_at);
                 String transaction_no = "" + id;
                 int day = 0;
                 try {
-                    Date d = DateType.datetime.parse(date_added);
+                    Date d = DateType.datetime.parse(created_at);
                     day = DateUtils1.count_days(d, new Date());
                 } catch (ParseException ex) {
                     Logger.getLogger(Rpt_ar_aging.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                double amount_due = 0;
 
-                for (Occupancy_types.to_occupancy_types tt : occupancy_types) {
-                    if (tt.occupancy_type_id.equals(occupancy_type_id)) {
-                        double total_cubic = current_reading - previous_reading;
-                        String[] cubics = tt.cubic.split(",");
-                        double low = FitIn.toDouble(cubics[0]);
-                        double high = FitIn.toDouble(cubics[1]);
-                        if (cubics[1].equalsIgnoreCase("above")) {
-                            high = 100000;
-                        }
-                        if (total_cubic >= low && total_cubic <= high) {
-
-                            amount_due = total_cubic * tt.charge + (tt.mf + tt.mr);
-                            break;
-                        }
-                    }
-                }
-                String one = "";
+                double one = 0;
                 if (day >= 0 && day <= 30) {
-                    one = FitIn.fmt_wc_0(amount_due);
+                    one = amount_due;
                 }
-                String two = "";
+                double two = 0;
                 if (day >= 31 && day <= 60) {
-                    two = FitIn.fmt_wc_0(amount_due);
+                    two = amount_due;
                 }
 
-                String three = "";
+                double three = 0;
                 if (day >= 61 && day <= 90) {
-                    three = FitIn.fmt_wc_0(amount_due);
+                    three = amount_due;
                 }
-                String four = "";
+                double four = 0;
                 if (day >= 91 && day <= 120) {
-                    four = FitIn.fmt_wc_0(amount_due);
+                    four = amount_due;
                 }
-                String five = "";
+                double five = 0;
                 if (day > 120) {
-                    five = FitIn.fmt_wc_0(amount_due);
+                    five = amount_due;
                 }
-                Rpt_ar_aging.field field = new field(customer_no, customer_name, date_applied, transaction_no, "" + day, one, two, three, four, five);
+                occupancy = occupancy_type_code + " - " + occupancy_type;
+
+                Rpt_ar_aging.field field = new field(customer_no, customer_name, date_applied, transaction_no, "" + day, one, two, three, four, five, customer_meter_no, barangay, occupancy);
                 datas.add(field);
 
             }

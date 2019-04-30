@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="43a806fd-3e0e-4803-942c-a274d78c79e6">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="barangay" class="java.lang.String"/>
@@ -19,6 +19,9 @@
 	<field name="amortization" class="java.lang.Double"/>
 	<field name="charge_amount" class="java.lang.Double"/>
 	<field name="amount_due" class="java.lang.Double"/>
+	<variable name="amount_due_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_due}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -361,6 +364,21 @@
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="89" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement uuid="70acc372-5fad-4660-8654-0d333189cf17" x="72" y="18" width="68" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{amount_due_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="96fcabc2-b4e0-4f3b-beeb-04ed6d6dc6f9" x="0" y="18" width="72" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Amount:]]></text>
+			</staticText>
+		</band>
 	</summary>
 </jasperReport>

@@ -22,6 +22,7 @@ import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.DateType;
+import vwws.util.Alert;
 import vwws.util.KeyCodes;
 import vwws.util.RenderButtons;
 
@@ -1386,11 +1387,11 @@ public class Dlg_cashiering_payment extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                disposed();
-            }
-        });
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
+                              disposed();
+                          }
+                      });
 
         KeyCodes.numpad(tf_amount_tendered, new JLabel());
 
@@ -1505,6 +1506,11 @@ public class Dlg_cashiering_payment extends javax.swing.JDialog {
         String check_holder1 = check_holder;
         String check_date1 = check_date;
         double change = FitIn.toDouble(lbl_p_change.getText());
+        if (change < 0) {
+            Alert.set(0, "Input Amount!");
+            tf_amount_tendered.grabFocus();
+            return;
+        }
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(amount_due, amount_paid, cash_paid, check_amount, check_bank, check_no, check_holder, check_date));
         }

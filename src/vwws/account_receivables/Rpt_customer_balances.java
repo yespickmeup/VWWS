@@ -29,54 +29,84 @@ import vwws.util.MyConnection;
  * @author Guinness
  */
 public class Rpt_customer_balances {
-
+    
     public final List<Rpt_customer_balances.field> fields;
-
+    
     public Rpt_customer_balances() {
         this.fields = new ArrayList();
     }
-
+    
     public static class field {
-
+        
         String customer_no;
         String customer_name;
+        String barangay;
+        String occupancy;
+        String meter_no;
         double balance;
-
+        
         public field() {
         }
-
-        public field(String customer_no, String customer_name, double balance) {
+        
+        public field(String customer_no, String customer_name, String barangay, String occupancy, String meter_no, double balance) {
             this.customer_no = customer_no;
             this.customer_name = customer_name;
+            this.barangay = barangay;
+            this.occupancy = occupancy;
+            this.meter_no = meter_no;
             this.balance = balance;
         }
-
+        
         public String getCustomer_no() {
             return customer_no;
         }
-
+        
         public void setCustomer_no(String customer_no) {
             this.customer_no = customer_no;
         }
-
+        
         public String getCustomer_name() {
             return customer_name;
         }
-
+        
         public void setCustomer_name(String customer_name) {
             this.customer_name = customer_name;
         }
-
+        
+        public String getBarangay() {
+            return barangay;
+        }
+        
+        public void setBarangay(String barangay) {
+            this.barangay = barangay;
+        }
+        
+        public String getOccupancy() {
+            return occupancy;
+        }
+        
+        public void setOccupancy(String occupancy) {
+            this.occupancy = occupancy;
+        }
+        
+        public String getMeter_no() {
+            return meter_no;
+        }
+        
+        public void setMeter_no(String meter_no) {
+            this.meter_no = meter_no;
+        }
+        
         public double getBalance() {
             return balance;
         }
-
+        
         public void setBalance(double balance) {
             this.balance = balance;
         }
-
+        
     }
-
+    
     public static void main(String[] args) {
         List<Rpt_customer_balances.field> fields = ret_data("");
         Rpt_customer_balances rpt = new Rpt_customer_balances();
@@ -86,39 +116,39 @@ public class Rpt_customer_balances {
         JFrame f = Application.launchMainFrame3(viewer, "Sample", true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+    
     public static JasperReport compileJasper(String jrxml) {
         try {
-
+            
             InputStream is = Rpt_customer_balances.class.getResourceAsStream(jrxml);
             JasperReport jasper = JasperCompileManager.compileReport(is);
-
+            
             return jasper;
         } catch (JRException e) {
             throw new RuntimeException(e);
         }
     }
-
+    
     public static JRViewer get_viewer(Rpt_customer_balances to, String jrxml) {
-
+        
         return JasperUtil.getJasperViewer(
                 compileJasper(jrxml),
                 JasperUtil.setParameter(to),
                 JasperUtil.makeDatasource(to.fields));
     }
-
+    
     public static List<Rpt_customer_balances.field> ret_data(String where) {
         List<Rpt_customer_balances.field> datas = new ArrayList();
         String where2 = " ";
         List<Occupancy_types.to_occupancy_types> occupancy_types = Occupancy_types.ret_data(where2);
-
+        
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select "
                     + "id"
                     + ",customer_no"
-                    + ",fname"
-                    + ",mi"
+                    + ",ifnull(fname,'')"
+                    + ",ifnull(mi,'')"
                     + ",lname"
                     + ",bday"
                     + ",city"
@@ -134,16 +164,17 @@ public class Rpt_customer_balances {
                     + ",date_added"
                     + ",date_updated"
                     + ",added_by_id"
-                    + ",update_by_id"
+                    + ",updated_by_id"
                     + ",status"
                     + ",occupancy_id"
                     + ",occupancy"
                     + ",occupancy_type_id"
                     + ",occupancy_type"
                     + ",occupancy_type_code"
+                    + ",ifnull(meter_no,'')"
                     + " from customers"
                     + " " + where;
-
+            
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
@@ -173,22 +204,26 @@ public class Rpt_customer_balances {
                 String occupancy_type_id = rs.getString(24);
                 String occupancy_type = rs.getString(25);
                 String occupancy_type_code = rs.getString(26);
-
+                String meter_no = rs.getString(27);
                 String name = lname + ", " + fname + " " + mi;
-                String bdate = DateType.convert_slash_datetime2(bday);
+                String bdate = "";
+                if (bday != null) {
+                    bday = DateType.convert_slash_datetime2(bday);
+                }
+                
                 String occupancies = occupancy_type_code + "" + occupancy;
                 double balances = 0;
-
+                
                 String where3 = " where customer_id='" + id + "' and is_paid='" + "0" + "' ";
                 String s2 = "select "
                         + "id"
                         + ",meter_reader_id"
-                        + ",meter_reader_no"
+                        + ",customer_meter_no"
                         + ",meter_reader_name"
                         + ",customer_id"
                         + ",customer_no"
                         + ",customer_name"
-                        + ",customer_tax_dec_no"
+                        + ",or_no"
                         + ",previous_reading"
                         + ",current_reading"
                         + ",city"
@@ -197,11 +232,11 @@ public class Rpt_customer_balances {
                         + ",barangay_id"
                         + ",purok"
                         + ",purok_id"
-                        + ",address"
-                        + ",date_added"
-                        + ",date_updated"
-                        + ",added_by_id"
-                        + ",update_by_id"
+                        + ",sitio"
+                        + ",created_at"
+                        + ",updated_at"
+                        + ",created_by"
+                        + ",updated_by"
                         + ",status"
                         + ",occupancy_id"
                         + ",occupancy"
@@ -212,12 +247,13 @@ public class Rpt_customer_balances {
                         + ",is_paid"
                         + ",or_id"
                         + ",or_no"
+                        + ",net_due"
                         + " from readings"
                         + " " + where3;
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery(s2);
                 while (rs2.next()) {
-
+                    
                     String meter_reader_id = rs2.getString(2);
                     String meter_reader_no = rs2.getString(3);
                     String meter_reader_name = rs2.getString(4);
@@ -230,47 +266,49 @@ public class Rpt_customer_balances {
                     int is_paid = rs2.getInt(29);
                     String or_id = rs2.getString(30);
                     String or_no = rs2.getString(31);
-
+                    double net_due = rs2.getDouble(32);
                     double amount = 0;
                     double amortization = 0;
                     double charge_amount = 0;
-                    double amount_due = 0;
+                    double amount_due = net_due;
 
-                    for (Occupancy_types.to_occupancy_types tt : occupancy_types) {
-                        if (tt.occupancy_type_id.equals(occupancy_type_id)) {
-                            double total_cubic = current_reading - previous_reading;
-                            String[] cubics = tt.cubic.split(",");
-                            double low = FitIn.toDouble(cubics[0]);
-                            double high = FitIn.toDouble(cubics[1]);
-                            if (cubics[1].equalsIgnoreCase("above")) {
-                                high = 100000;
-                            }
-                            if (total_cubic >= low && total_cubic <= high) {
-
-                                amount_due = total_cubic * tt.charge + (tt.mf + tt.mr);
-                                charge_amount = tt.charge;
-                                amortization = tt.mr;
-                                break;
-                            }
-
-                        }
-                    }
-                    String period_from = DateType.convert_slash_datetime(previous_reading_date);
-                    if (period_from.equals("02/08/1991")) {
-                        period_from = "";
-                    }
-
-                    String period_to = DateType.convert_slash_datetime(date_added);
-                    double present_reading = current_reading;
-                    double previous_reading1 = previous_reading;
-                    double total_consumption = present_reading - previous_reading1;
-                    double interest = 0;
-                    double less_amount = 0;
+//                    for (Occupancy_types.to_occupancy_types tt : occupancy_types) {
+//                        if (tt.occupancy_type_id.equals(occupancy_type_id)) {
+//                            double total_cubic = current_reading - previous_reading;
+//                            String[] cubics = tt.cubic.split(",");
+//                            double low = FitIn.toDouble(cubics[0]);
+//                            double high = FitIn.toDouble(cubics[1]);
+//                            if (cubics[1].equalsIgnoreCase("above")) {
+//                                high = 100000;
+//                            }
+//                            if (total_cubic >= low && total_cubic <= high) {
+//
+//                                amount_due = total_cubic * tt.charge + (tt.mf + tt.mr);
+//                                charge_amount = tt.charge;
+//                                amortization = tt.mr;
+//                                break;
+//                            }
+//
+//                        }
+//                    }
+//                    String period_from = DateType.convert_slash_datetime(previous_reading_date);
+//                    if (period_from.equals("02/08/1991")) {
+//                        period_from = "";
+//                    }
+//
+//                    String period_to = DateType.convert_slash_datetime(date_added);
+//                    double present_reading = current_reading;
+//                    double previous_reading1 = previous_reading;
+//                    double total_consumption = present_reading - previous_reading1;
+//                    double interest = 0;
+//                    double less_amount = 0;
                     balances += amount_due;
-
+                    
                 }
-
-                Rpt_customer_balances.field to = new Rpt_customer_balances.field(customer_no, name, balances);
+                
+                occupancy = occupancy_type_code + " - " + occupancy_type;
+                
+                Rpt_customer_balances.field to = new Rpt_customer_balances.field(customer_no, name, barangay, occupancy, meter_no, balances);
                 datas.add(to);
             }
             return datas;

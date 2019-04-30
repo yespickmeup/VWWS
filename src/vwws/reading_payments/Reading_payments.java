@@ -56,8 +56,10 @@ public class Reading_payments {
         public final String update_by_id;
         public final int status;
         public final int is_counted;
+        public final String customer_no;
+        public final String meter_no;
 
-        public to_reading_payments(int id, String or_no, String customer_id, String customer_name, String reading_ids, double amount_due, double amount_paid, double cash_paid, double check_amount, String check_bank, String check_no, String check_holder, String check_date, String discount_name, double discount_amount, double discount_rate, String discount_customer_name, String discount_customer_id, String city, String city_id, String barangay, String barangay_id, String purok, String purok_id, String address, String date_added, String date_updated, String added_by_id, String update_by_id, int status, int is_counted) {
+        public to_reading_payments(int id, String or_no, String customer_id, String customer_name, String reading_ids, double amount_due, double amount_paid, double cash_paid, double check_amount, String check_bank, String check_no, String check_holder, String check_date, String discount_name, double discount_amount, double discount_rate, String discount_customer_name, String discount_customer_id, String city, String city_id, String barangay, String barangay_id, String purok, String purok_id, String address, String date_added, String date_updated, String added_by_id, String update_by_id, int status, int is_counted, String customer_no, String meter_no) {
             this.id = id;
             this.or_no = or_no;
             this.customer_id = customer_id;
@@ -89,6 +91,8 @@ public class Reading_payments {
             this.update_by_id = update_by_id;
             this.status = status;
             this.is_counted = is_counted;
+            this.customer_no = customer_no;
+            this.meter_no = meter_no;
         }
     }
 
@@ -127,6 +131,8 @@ public class Reading_payments {
                     + ",update_by_id"
                     + ",status"
                     + ",is_counted"
+                    + ",customer_no"
+                    + ",meter_no"
                     + ")values("
                     + ":or_no"
                     + ",:customer_id"
@@ -158,6 +164,8 @@ public class Reading_payments {
                     + ",:update_by_id"
                     + ",:status"
                     + ",:is_counted"
+                    + ",:customer_no"
+                    + ",:meter_no"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -191,6 +199,8 @@ public class Reading_payments {
                     .setString("update_by_id", to_reading_payments.update_by_id)
                     .setNumber("status", to_reading_payments.status)
                     .setNumber("is_counted", to_reading_payments.is_counted)
+                    .setString("customer_no", to_reading_payments.customer_no)
+                    .setString("meter_no", to_reading_payments.meter_no)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -258,6 +268,8 @@ public class Reading_payments {
                     + ",update_by_id= :update_by_id "
                     + ",status= :status "
                     + ",is_counted= :is_counted"
+                    + ",customer_no= :customer_no"
+                    + ",meter_no= :meter_no"
                     + " where id='" + to_reading_payments.id + "' "
                     + " ";
 
@@ -292,6 +304,8 @@ public class Reading_payments {
                     .setString("update_by_id", to_reading_payments.update_by_id)
                     .setNumber("status", to_reading_payments.status)
                     .setNumber("is_counted", to_reading_payments.is_counted)
+                    .setString("customer_no", to_reading_payments.customer_no)
+                    .setString("meter_no", to_reading_payments.meter_no)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -358,6 +372,8 @@ public class Reading_payments {
                     + ",update_by_id"
                     + ",status"
                     + ",is_counted"
+                    + ",customer_no"
+                    + ",meter_no"
                     + " from reading_payments"
                     + " " + where;
 
@@ -394,11 +410,14 @@ public class Reading_payments {
                 String added_by_id = rs.getString(28);
                 String update_by_id = rs.getString(29);
                 int status = rs.getInt(30);
-                int is_counted=rs.getInt(31);
-                to_reading_payments to = new to_reading_payments(id, or_no, customer_id, customer_name, reading_ids, amount_due
-                        , amount_paid, cash_paid, check_amount, check_bank, check_no, check_holder, check_date, discount_name
-                        , discount_amount, discount_rate, discount_customer_name, discount_customer_id, city, city_id, barangay
-                        , barangay_id, purok, purok_id, address, date_added, date_updated, added_by_id, update_by_id, status,is_counted);
+                int is_counted = rs.getInt(31);
+                String customer_no=rs.getString(32);
+                String meter_no=rs.getString(33);
+                to_reading_payments to = new to_reading_payments(id, or_no, customer_id, customer_name, reading_ids, amount_due,
+                                                                 amount_paid, cash_paid, check_amount, check_bank, check_no, check_holder, check_date, discount_name,
+                                                                 discount_amount, discount_rate, discount_customer_name, discount_customer_id, city, city_id, barangay,
+                                                                 barangay_id, purok, purok_id, address, date_added, date_updated, added_by_id, update_by_id, status
+                        , is_counted,customer_no,meter_no);
                 datas.add(to);
             }
             return datas;

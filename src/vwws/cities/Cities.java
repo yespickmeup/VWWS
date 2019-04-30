@@ -30,15 +30,19 @@ public class Cities {
         public final String date_updated;
         public final String added_by_id;
         public final String update_by_id;
+        public final int status;
+        public final int is_default;
         public final int no_of_barangays;
 
-        public to_cities(int id, String city, String date_added, String date_updated, String added_by_id, String update_by_id, int no_of_barangays) {
+        public to_cities(int id, String city, String date_added, String date_updated, String added_by_id, String update_by_id, int status, int is_default, int no_of_barangays) {
             this.id = id;
             this.city = city;
             this.date_added = date_added;
             this.date_updated = date_updated;
             this.added_by_id = added_by_id;
             this.update_by_id = update_by_id;
+            this.status = status;
+            this.is_default = is_default;
             this.no_of_barangays = no_of_barangays;
         }
     }
@@ -52,12 +56,16 @@ public class Cities {
                     + ",date_updated"
                     + ",added_by_id"
                     + ",update_by_id"
+                    + ",status"
+                    + ",is_default"
                     + ")values("
                     + ":city"
                     + ",:date_added"
                     + ",:date_updated"
                     + ",:added_by_id"
                     + ",:update_by_id"
+                    + ",:status"
+                    + ",:is_default"
                     + ")";
 
             s0 = SqlStringUtil.parse(s0)
@@ -66,6 +74,8 @@ public class Cities {
                     .setString("date_updated", to_cities.date_updated)
                     .setString("added_by_id", to_cities.added_by_id)
                     .setString("update_by_id", to_cities.update_by_id)
+                    .setNumber("status", to_cities.status)
+                    .setNumber("is_default", to_cities.is_default)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -87,6 +97,8 @@ public class Cities {
                     + ",date_updated= :date_updated "
                     + ",added_by_id= :added_by_id "
                     + ",update_by_id= :update_by_id "
+                    + ",status= :status"
+                    + ",is_default= :is_default"
                     + " where id='" + to_cities.id + "' "
                     + " ";
 
@@ -96,6 +108,8 @@ public class Cities {
                     .setString("date_updated", to_cities.date_updated)
                     .setString("added_by_id", to_cities.added_by_id)
                     .setString("update_by_id", to_cities.update_by_id)
+                    .setNumber("status", to_cities.status)
+                    .setNumber("is_default", to_cities.is_default)
                     .ok();
 
             PreparedStatement stmt = conn.prepareStatement(s0);
@@ -138,6 +152,8 @@ public class Cities {
                     + ",c.added_by_id"
                     + ",c.update_by_id"
                     + ",(select count(b.id) from barangays b where b.city_id=c.id) "
+                    + ",c.status"
+                    + ",c.is_default"
                     + " from cities c"
                     + " " + where;
 
@@ -151,8 +167,9 @@ public class Cities {
                 String added_by_id = rs.getString(5);
                 String update_by_id = rs.getString(6);
                 int no_of_barangays = rs.getInt(7);
-
-                to_cities to = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, no_of_barangays);
+                int status = rs.getInt(8);
+                int is_default = rs.getInt(9);
+                to_cities to = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, no_of_barangays, status, is_default);
                 datas.add(to);
             }
             return datas;
@@ -175,6 +192,8 @@ public class Cities {
                     + ",c.date_updated"
                     + ",c.added_by_id"
                     + ",c.update_by_id"
+                    + ",c.status"
+                    + ",c.is_default"
                     + " from cities c"
                     + " " + where;
 
@@ -187,8 +206,9 @@ public class Cities {
                 String date_updated = rs.getString(4);
                 String added_by_id = rs.getString(5);
                 String update_by_id = rs.getString(6);
-
-                to_cities to = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, 0);
+                int status = rs.getInt(8);
+                int is_default = rs.getInt(9);
+                to_cities to = new to_cities(id, city, date_added, date_updated, added_by_id, update_by_id, 0, status, is_default);
                 datas.add(to);
             }
             return datas;

@@ -444,6 +444,11 @@ id int auto_increment primary key
 ,occupancy_type_id varchar(100)
 ,occupancy_type varchar(100)
 ,occupancy_type_code varchar(100)
+,city varchar(255)
+,city_id varchar(255)
+,sitio varchar(255)
+,sitio_id varchar(255)
+,meter_no varchar(255)
 );
 
 

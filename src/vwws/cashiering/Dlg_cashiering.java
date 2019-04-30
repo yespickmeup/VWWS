@@ -12,11 +12,15 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -26,12 +30,17 @@ import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.fields.Label;
 import synsoftech.util.DateType;
+import synsoftech.util.ImageRenderer;
+import vwws.barangays.Barangays;
+import vwws.cities.Cities;
 import vwws.customers.Customers;
 import vwws.occupancy_types.Occupancy_types;
 import vwws.reading_payments.Reading_payments;
 import vwws.readings.Readings;
 import vwws.readings.Readings.to_readings;
+import vwws.util.Alert;
 import vwws.util.MyUser;
+import vwws.util.TableRenderer;
 
 /**
  *
@@ -198,14 +207,33 @@ public class Dlg_cashiering extends javax.swing.JDialog {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_customers = new javax.swing.JTable();
-        jTextField1 = new Field.Search();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jTextField2 = new Field.Combo();
+        jLabel20 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jTextField3 = new Field.Combo();
+        jLabel21 = new javax.swing.JLabel();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jTextField4 = new Field.Combo();
+        jTextField5 = new Field.Combo();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
+        jCheckBox10 = new javax.swing.JCheckBox();
+        jLabel24 = new javax.swing.JLabel();
+        jTextField7 = new Field.Input();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_readings = new javax.swing.JTable();
@@ -261,13 +289,6 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tbl_customers);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/family24.png"))); // NOI18N
         jLabel2.setText("Customers");
@@ -276,6 +297,183 @@ public class Dlg_cashiering extends javax.swing.JDialog {
 
         jLabel3.setText("0");
 
+        jPanel4.setOpaque(false);
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel19.setText("City/Municipality:");
+
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox1.setText("All");
+
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField2MouseClicked(evt);
+            }
+        });
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel20.setText("Barangay:");
+
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox2.setText("All");
+
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField3MouseClicked(evt);
+            }
+        });
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel21.setText("Purok:");
+
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox4.setSelected(true);
+        jCheckBox4.setText("All");
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox3.setSelected(true);
+        jCheckBox3.setText("All");
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel22.setText("Sitio:");
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setText("Search By:");
+
+        buttonGroup1.add(jCheckBox6);
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox6.setSelected(true);
+        jCheckBox6.setText("Name");
+
+        buttonGroup1.add(jCheckBox9);
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox9.setText("Meter Number");
+
+        buttonGroup1.add(jCheckBox10);
+        jCheckBox10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBox10.setText("Account No");
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setText("Search:");
+
+        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField7KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField5)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel23))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextField7)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jCheckBox1))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField2)))))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addGap(1, 1, 1)
+                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox4)))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jCheckBox9)
+                    .addComponent(jCheckBox10))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -283,13 +481,13 @@ public class Dlg_cashiering extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -297,10 +495,10 @@ public class Dlg_cashiering extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -440,7 +638,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -508,10 +706,6 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        data_cols();
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void tbl_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_customersMouseClicked
         data_readings();
     }//GEN-LAST:event_tbl_customersMouseClicked
@@ -536,12 +730,44 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         payment();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
+        init_cities(jTextField2);
+    }//GEN-LAST:event_jTextField2MouseClicked
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        init_cities(jTextField2);
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
+        init_barangay(jTextField3);
+    }//GEN-LAST:event_jTextField3MouseClicked
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        init_barangay(jTextField3);
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        data_cols();
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
+        data_cols();
+    }//GEN-LAST:event_jTextField7KeyReleased
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -552,7 +778,13 @@ public class Dlg_cashiering extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel45;
@@ -565,10 +797,15 @@ public class Dlg_cashiering extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField7;
     private javax.swing.JTable tbl_customers;
     private javax.swing.JTable tbl_readings;
     // End of variables declaration//GEN-END:variables
@@ -577,10 +814,94 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         init_tbl_customers(tbl_customers);
         data_cols();
         init_tbl_readings(tbl_readings);
+        cities = Cities.ret_data("");
+        barangays = Barangays.ret_data(" order by barangay asc ");
+        set_default_location();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                jTextField7.grabFocus();
+            }
+        });
+
     }
 
     public void do_pass() {
 
+    }
+
+    private void set_default_location() {
+        List<Cities.to_cities> cts = cities;
+        List<Barangays.to_barangays> bar = barangays;
+        if (!bar.isEmpty()) {
+            Barangays.to_barangays b = (Barangays.to_barangays) bar.get(0);
+            Field.Combo tfs = (Field.Combo) jTextField3;
+            tfs.setText(b.barangay);
+            tfs.setId("" + b.id);
+        }
+
+        for (Cities.to_cities c : cts) {
+            if (c.is_default == 1) {
+                Field.Combo tfs = (Field.Combo) jTextField2;
+                tfs.setText(c.city);
+                tfs.setId("" + c.id);
+                break;
+            }
+        }
+    }
+    List<Cities.to_cities> cities = new ArrayList();
+
+    private void init_cities(final JTextField tf) {
+
+        Object[][] obj = new Object[cities.size()][1];
+        int i = 0;
+        for (Cities.to_cities to : cities) {
+            obj[i][0] = " " + to.city;
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf.getWidth()};
+        int width = 0;
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(tf, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Field.Combo tfs = (Field.Combo) tf;
+                Cities.to_cities to = cities.get(data.selected_row);
+                tfs.setText(to.city);
+                tfs.setId("" + to.id);
+            }
+        });
+    }
+    List<Barangays.to_barangays> barangays = new ArrayList();
+
+    private void init_barangay(final JTextField tf) {
+
+        Object[][] obj = new Object[barangays.size()][1];
+        int i = 0;
+        for (Barangays.to_barangays to : barangays) {
+            obj[i][0] = " " + to.barangay;
+            i++;
+        }
+
+        JLabel[] labels = {};
+        int[] tbl_widths_customers = {tf.getWidth()};
+        int width = 0;
+        String[] col_names = {""};
+        TableRenderer tr = new TableRenderer();
+        TableRenderer.setPopup(tf, obj, labels, tbl_widths_customers, col_names);
+        tr.setCallback(new TableRenderer.Callback() {
+            @Override
+            public void ok(TableRenderer.OutputData data) {
+                Field.Combo tfs = (Field.Combo) tf;
+                Barangays.to_barangays to = barangays.get(data.selected_row);
+                tfs.setText(to.barangay);
+                tfs.setId("" + to.id);
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Key">
@@ -592,12 +913,12 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         KeyMapping.mapKeyWIFW(getSurface(),
                               KeyEvent.VK_ESCAPE, new KeyAction() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                          @Override
+                          public void actionPerformed(ActionEvent e) {
 //                btn_0.doClick();
-                disposed();
-            }
-        });
+                              disposed();
+                          }
+                      });
     }
     // </editor-fold>
 
@@ -611,7 +932,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         tbl_customers.setModel(tbl_customers_M);
         tbl_customers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_customers.setRowHeight(25);
-        int[] tbl_widths_customers = {80, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] tbl_widths_customers = {80, 150, 80, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int i = 0, n = tbl_widths_customers.length; i < n; i++) {
             if (i == 1) {
                 continue;
@@ -624,6 +945,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         tbl_customers.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_customers.setRowHeight(25);
         tbl_customers.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_customers.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer());
     }
 
     public static void loadData_customers(List<Customers.to_customers> acc) {
@@ -634,7 +956,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
     public static class TblcustomersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "ID #", "Name", "Barangay", "Purok", "lname", "bday", "city", "city_id", "barangay", "barangay_id", "purok", "purok_id", "address", "balance", "tax_dec_no", "meter_is_paid", "date_added", "date_updated", "added_by_id", "update_by_id", "status"
+            "ID #", "Name", "Meter No", "", "lname", "bday", "city", "city_id", "barangay", "barangay_id", "purok", "purok_id", "address", "balance", "tax_dec_no", "meter_is_paid", "date_added", "date_updated", "added_by_id", "update_by_id", "status"
         };
 
         public TblcustomersModel(ListModel listmodel) {
@@ -664,9 +986,20 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 case 1:
                     return " " + tt.lname + ", " + tt.fname + " " + tt.mi;
                 case 2:
-                    return " " + tt.barangay;
+                    return " " + tt.meter_no;
                 case 3:
-                    return " " + tt.purok;
+                    if (tt.status == 0) { //new
+                        return "/vwws/icons/tick-inside-circle.png";
+                    } else if (tt.status == 1) { //active
+                        return "/vwws/icons/tick-inside-circle (1).png";
+                    } else if (tt.status == 2) { //disconnected
+                        return "/vwws/icons/tick-inside-circle (2).png";
+                    } else if (tt.status == 3) { //for reconnection
+                        return "/vwws/icons/tick-inside-circle (3).png";
+                    } else if (tt.status == 4) { //closed
+                        return "/vwws/icons/tick-inside-circle (4).png";
+                    }
+
                 case 4:
                     return tt.purok;
                 case 5:
@@ -698,7 +1031,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 case 18:
                     return tt.added_by_id;
                 case 19:
-                    return tt.update_by_id;
+                    return tt.added_by_id;
                 default:
                     return tt.status;
             }
@@ -706,10 +1039,41 @@ public class Dlg_cashiering extends javax.swing.JDialog {
     }
 
     private void data_cols() {
-        String where = " where concat(lname,space(1),fname,space(10),mi) like '%" + jTextField1.getText() + "%' "
-                + " or concat(fname,space(1),lname) like '%" + jTextField1.getText() + "%' "
-                + " or customer_no like '%" + jTextField1.getText() + "%' "
-                + " order by lname asc";
+        Field.Combo city = (Field.Combo) jTextField2;
+        Field.Combo barangay = (Field.Combo) jTextField3;
+        Field.Combo purok = (Field.Combo) jTextField4;
+        Field.Combo sitio = (Field.Combo) jTextField5;
+
+        String where = " where tax_dec_no like '%%' ";
+        if (!jCheckBox1.isSelected()) {
+            where = where + " and city_id='" + city.getId() + "' ";
+            if (!jCheckBox2.isSelected()) {
+                where = where + " and barangay_id='" + barangay.getId() + "' ";
+                if (!jCheckBox4.isSelected()) {
+                    where = where + " and purok_id='" + purok.getId() + "' ";
+                    if (!jCheckBox3.isSelected()) {
+                        where = where + " and sitio_id='" + sitio.getId() + "' ";
+                    }
+                }
+            }
+        }
+        String search = jTextField7.getText();
+        if (jCheckBox6.isSelected()) {
+
+            if (!search.isEmpty()) {
+                String where2 = where.replace("where", "");
+                where = where + " and (concat(fname,'',lname)) like '%" + search + "%' or " + where2 + " and (concat(lname,'',fname)) like '%" + search + "%'";
+
+            }
+
+        } else if (jCheckBox9.isSelected()) {
+            where = where + " and meter_no like '%" + search + "%' ";
+        } else if (jCheckBox10.isSelected()) {
+            where = where + " and customer_no like '%" + search + "%' ";
+        }
+
+        where = where + " order by lname asc ";
+
         List<Customers.to_customers> datas = Customers.ret_data(where);
         loadData_customers(datas);
         jLabel3.setText("" + datas.size());
@@ -779,7 +1143,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
             to_readings tt = (to_readings) getRow(row);
             switch (col) {
                 case 0:
-                    return " " + DateType.convert_slash_datetime(tt.date_added);
+                    return " " + DateType.convert_slash_datetime(tt.created_at);
                 case 1:
                     return " " + FitIn.fmt_woc(tt.previous_reading);
                 case 2:
@@ -793,7 +1157,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 case 6:
                     return FitIn.fmt_wc_0(tt.interest) + " ";
                 case 7:
-                    return FitIn.fmt_wc_0(tt.amount) + " ";
+                    return FitIn.fmt_wc_0(tt.amount_due) + " ";
                 case 8:
                     if (tt.status == 1) {
                         return " Paid";
@@ -815,15 +1179,15 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 case 15:
                     return tt.purok_id;
                 case 16:
-                    return tt.address;
+                    return tt.purok_id;
                 case 17:
-                    return tt.date_added;
+                    return tt.purok_id;
                 case 18:
-                    return tt.date_updated;
+                    return tt.purok_id;
                 case 19:
-                    return tt.added_by_id;
+                    return tt.purok_id;
                 case 20:
-                    return tt.update_by_id;
+                    return tt.purok_id;
                 default:
                     return tt.status;
             }
@@ -836,32 +1200,47 @@ public class Dlg_cashiering extends javax.swing.JDialog {
             return;
         }
         Customers.to_customers to = (Customers.to_customers) tbl_customers_ALM.get(row);
+        if (to.status == 0) {
+            Alert.set(0, "Account not yet Activated!");
+            return;
+        }
+        if (to.status == 2) {
+            Alert.set(0, "Account Disconnected!");
+            return;
+        }
+        if (to.status == 3) {
+            Alert.set(0, "Account waiting for reconnection!");
+            return;
+        }
+        if (to.status == 4) {
+            Alert.set(0, "Account closed!!");
+            return;
+        }
         String where2 = " where occupancy='" + to.occupancy + "' and occupancy_type_id='" + to.occupancy_type_id + "' ";
         List<Occupancy_types.to_occupancy_types> occupancy_types = Occupancy_types.ret_data(where2);
 
         String where = " where customer_id='" + to.id + "' and is_paid='" + "0" + "' ";
         List<to_readings> datas = Readings.ret_data(where);
-        for (to_readings t : datas) {
-            double cubic = t.current_reading - t.previous_reading;
-            double amount = 0;
-            for (Occupancy_types.to_occupancy_types tt : occupancy_types) {
-                String[] cubics = tt.cubic.split(",");
-                double low = FitIn.toDouble(cubics[0]);
-                double high = FitIn.toDouble(cubics[1]);
-                if (cubics[1].equalsIgnoreCase("above")) {
-                    high = 100000;
-                }
-                double total_cubic = t.current_reading - t.previous_reading;
-
-                if (total_cubic >= low && total_cubic <= high) {
-                    double total_amount = total_cubic * tt.charge + (tt.mf + tt.mr);
-                    t.setAmount(total_amount);
-                    t.setMf(tt.mf);
-                    t.setMr(tt.mr);
-                    break;
-                }
-            }
-        }
+//        for (to_readings t : datas) {
+//            double cubic = t.current_reading - t.previous_reading;
+//            double amount = 0;
+//            double total_cubic = t.current_reading - t.previous_reading;
+//            double total_amount = total_cubic * tt.charge + (tt.mf + tt.mr);
+//
+////            for (Occupancy_types.to_occupancy_types tt : occupancy_types) {
+////                String[] cubics = tt.cubic.split(",");
+////                double low = FitIn.toDouble(cubics[0]);
+////                double high = FitIn.toDouble(cubics[1]);
+////                if (cubics[1].equalsIgnoreCase("above")) {
+////                    high = 100000;
+////                }
+////
+////                if (total_cubic >= low && total_cubic <= high) {
+////
+////                    break;
+////                }
+////            }
+//        }
         loadData_readings(datas);
         compute();
     }
@@ -880,7 +1259,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         for (to_readings to : datas) {
             if (to.isSelected()) {
                 consumption += to.current_reading - to.previous_reading;
-                amount += to.amount;
+                amount += to.amount_due;
                 maintenace_charge += to.mf;
                 amortization += to.mr;
             }
@@ -938,7 +1317,7 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 } else {
                     reading_ids = reading_ids + "," + to.id;
                 }
-                amount_due += to.amount + to.interest;
+                amount_due += to.amount_due + to.interest;
                 i++;
             }
         }
@@ -969,26 +1348,31 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 double discount_rate = 0;
                 String discount_customer_name = "";
                 String discount_customer_id = "";
-                String city = "";
-                String city_id = "";
-                String barangay = "";
-                String barangay_id = "";
-                String purok = "";
-                String purok_id = "";
-                String address = "";
+                String city = customer.city;
+                String city_id = customer.city_id;
+                String barangay = customer.barangay;
+                String barangay_id = customer.barangay_id;
+                String purok = customer.purok;
+                String purok_id = customer.purok_id;
+                String address = customer.address;
                 String date_added = DateType.now();
                 String date_updated = DateType.now();
                 String added_by_id = MyUser.getUser_id();
                 String update_by_id = MyUser.getUser_id();
                 int status = 0;
                 int is_counted = 1;
-                Reading_payments.to_reading_payments rp = new Reading_payments.to_reading_payments(id, or_no, customer_id, customer_name, reading_ids1, amount_due, amount_paid, cash_paid, check_amount, check_bank, check_no, check_holder, check_date, discount_name, discount_amount, discount_rate, discount_customer_name, discount_customer_id, city, city_id, barangay, barangay_id, purok, purok_id, address, date_added, date_updated, added_by_id, update_by_id, status, is_counted);
+                String customer_no = customer.customer_no;
+                String meter_no = customer.meter_no;
+                Reading_payments.to_reading_payments rp = new Reading_payments.to_reading_payments(id, or_no, customer_id, customer_name, reading_ids1, amount_due,
+                         amount_paid, cash_paid, check_amount, check_bank, check_no, check_holder, check_date, discount_name, discount_amount, discount_rate,
+                         discount_customer_name, discount_customer_id, city, city_id, barangay, barangay_id, purok, purok_id, address, date_added, date_updated,
+                         added_by_id, update_by_id, status, is_counted, customer_no, meter_no);
                 int add = 0;
 
                 do {
                     add = Reading_payments.add_data(rp);
                     if (add == 1) {
-                        System.out.println("Successfully Added!");
+                        Alert.set(0, "Payment Successful!");
                         data_readings();
                     } else {
                         System.out.println("Failed!");

@@ -27,7 +27,7 @@ import vwws.barangays.Dlg_barangays;
 import vwws.cashiering.Dlg_cashiering;
 import vwws.cities.Dlg_cities;
 import vwws.collections.Dlg_report_collections;
-import vwws.customers.Dlg_customers;
+import vwws.customers.Dlg_customers_2;
 import vwws.customers.Dlg_report_customers;
 import vwws.inventory.Dlg_inventory;
 import vwws.meter_readers.Dlg_meter_reader_assignments;
@@ -85,11 +85,15 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         pnl_holder = new javax.swing.JPanel();
         pnl_login = new javax.swing.JPanel();
+        jPanel30 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        tf_fname = new Field.Input();
         jLabel5 = new javax.swing.JLabel();
+        tf_fname = new Field.Input();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton2 = new Button.Default();
+        jLabel58 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
         pnl_main_menu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -171,7 +175,7 @@ public class DashBoard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(3, 170, 244));
+        jPanel1.setBackground(new java.awt.Color(5, 150, 215));
 
         jLabel11.setBackground(new java.awt.Color(234, 234, 234));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -206,7 +210,7 @@ public class DashBoard extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
-        jDesktopPane1.setBackground(new java.awt.Color(234, 234, 234));
+        jDesktopPane1.setBackground(new java.awt.Color(3, 170, 244));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -232,9 +236,9 @@ public class DashBoard extends javax.swing.JFrame {
             .addGap(0, 13, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(3, 170, 244));
 
-        jPanel4.setBackground(new java.awt.Color(234, 234, 234));
+        jPanel4.setBackground(new java.awt.Color(3, 170, 244));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -247,7 +251,7 @@ public class DashBoard extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel5.setBackground(new java.awt.Color(234, 234, 234));
+        jPanel5.setBackground(new java.awt.Color(3, 170, 244));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -260,7 +264,7 @@ public class DashBoard extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel6.setBackground(new java.awt.Color(234, 234, 234));
+        jPanel6.setBackground(new java.awt.Color(3, 170, 244));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -273,7 +277,7 @@ public class DashBoard extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel7.setBackground(new java.awt.Color(234, 234, 234));
+        jPanel7.setBackground(new java.awt.Color(3, 170, 244));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -286,15 +290,21 @@ public class DashBoard extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        pnl_holder.setBackground(new java.awt.Color(234, 234, 234));
+        pnl_holder.setBackground(new java.awt.Color(3, 170, 244));
         pnl_holder.setLayout(new java.awt.CardLayout());
 
-        pnl_login.setBackground(new java.awt.Color(234, 234, 234));
+        pnl_login.setBackground(new java.awt.Color(3, 170, 244));
         pnl_login.setOpaque(false);
 
+        jPanel30.setOpaque(false);
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("USERNAME:");
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Username:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Password:");
 
         tf_fname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tf_fname.addActionListener(new java.awt.event.ActionListener() {
@@ -302,10 +312,6 @@ public class DashBoard extends javax.swing.JFrame {
                 tf_fnameActionPerformed(evt);
             }
         });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("PASSWORD:");
 
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -322,45 +328,85 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel58.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel58.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel58.setText("System");
+
+        jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/raindrop.png"))); // NOI18N
+
+        jLabel57.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel57.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel57.setText("Valencia Waterworks");
+
+        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
+        jPanel30.setLayout(jPanel30Layout);
+        jPanel30Layout.setHorizontalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel57, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                    .addComponent(jLabel58, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(tf_fname))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+        jPanel30Layout.setVerticalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel59, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout pnl_loginLayout = new javax.swing.GroupLayout(pnl_login);
         pnl_login.setLayout(pnl_loginLayout);
         pnl_loginLayout.setHorizontalGroup(
             pnl_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_loginLayout.createSequentialGroup()
-                .addContainerGap(118, Short.MAX_VALUE)
-                .addGroup(pnl_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_fname))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122))
+            .addGroup(pnl_loginLayout.createSequentialGroup()
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         pnl_loginLayout.setVerticalGroup(
             pnl_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_loginLayout.createSequentialGroup()
-                .addGap(203, 203, 203)
-                .addGroup(pnl_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnl_loginLayout.createSequentialGroup()
-                        .addGroup(pnl_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addGroup(pnl_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(232, 232, 232))
+                .addContainerGap(169, Short.MAX_VALUE)
+                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         pnl_holder.add(pnl_login, "card2");
 
-        pnl_main_menu.setBackground(new java.awt.Color(234, 234, 234));
+        pnl_main_menu.setBackground(new java.awt.Color(3, 170, 244));
 
-        jLabel1.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/transactions.png"))); // NOI18N
         jLabel1.setOpaque(true);
@@ -371,11 +417,11 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Transactions");
 
-        jLabel2.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/cogwheels4 (2).png"))); // NOI18N
         jLabel2.setOpaque(true);
@@ -386,11 +432,11 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Maintenance");
 
-        jLabel3.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/reports.png"))); // NOI18N
         jLabel3.setOpaque(true);
@@ -401,11 +447,11 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Reports");
 
-        jLabel9.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/refresh61 (3).png"))); // NOI18N
         jLabel9.setOpaque(true);
@@ -419,7 +465,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Back");
 
@@ -468,17 +514,17 @@ public class DashBoard extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         pnl_holder.add(pnl_main_menu, "card3");
 
-        pnl_maintenance.setBackground(new java.awt.Color(234, 234, 234));
+        pnl_maintenance.setBackground(new java.awt.Color(3, 170, 244));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setOpaque(false);
 
-        jLabel12.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/family24 (1).png"))); // NOI18N
         jLabel12.setOpaque(true);
@@ -489,7 +535,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Customers");
 
@@ -519,7 +565,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setOpaque(false);
 
-        jLabel14.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/man216 (2).png"))); // NOI18N
         jLabel14.setOpaque(true);
@@ -530,7 +576,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Meter Reader");
 
@@ -560,7 +606,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setOpaque(false);
 
-        jLabel16.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/beach12.png"))); // NOI18N
         jLabel16.setOpaque(true);
@@ -571,7 +617,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Occupancy");
 
@@ -601,7 +647,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setOpaque(false);
 
-        jLabel18.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/modern13.png"))); // NOI18N
         jLabel18.setOpaque(true);
@@ -612,7 +658,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Occup. Type");
 
@@ -642,7 +688,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setOpaque(false);
 
-        jLabel20.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/water46.png"))); // NOI18N
         jLabel20.setOpaque(true);
@@ -653,7 +699,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Pipe Sizes");
 
@@ -683,7 +729,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setOpaque(false);
 
-        jLabel22.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/user2.png"))); // NOI18N
         jLabel22.setOpaque(true);
@@ -694,7 +740,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Users");
 
@@ -724,7 +770,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
         jPanel14.setOpaque(false);
 
-        jLabel24.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/refresh61 (4).png"))); // NOI18N
         jLabel24.setOpaque(true);
@@ -735,7 +781,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("Back");
 
@@ -765,7 +811,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setOpaque(false);
 
-        jLabel30.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel30.setBackground(new java.awt.Color(255, 255, 255));
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/map-pointer2.png"))); // NOI18N
         jLabel30.setOpaque(true);
@@ -776,7 +822,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("Assignments");
 
@@ -806,7 +852,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setOpaque(false);
 
-        jLabel34.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/dollar92.png"))); // NOI18N
         jLabel34.setOpaque(true);
@@ -817,7 +863,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel35.setText("Banks");
 
@@ -847,7 +893,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel22.setBackground(new java.awt.Color(255, 255, 255));
         jPanel22.setOpaque(false);
 
-        jLabel40.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel40.setBackground(new java.awt.Color(255, 255, 255));
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/city8 (1).png"))); // NOI18N
         jLabel40.setOpaque(true);
@@ -858,7 +904,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setText("Cities");
 
@@ -886,7 +932,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel23.setBackground(new java.awt.Color(255, 255, 255));
         jPanel23.setOpaque(false);
 
-        jLabel42.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel42.setBackground(new java.awt.Color(255, 255, 255));
         jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/rural30.png"))); // NOI18N
         jLabel42.setOpaque(true);
@@ -897,7 +943,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
         jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel43.setText("Barangays");
 
@@ -925,7 +971,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
         jPanel28.setOpaque(false);
 
-        jLabel53.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel53.setBackground(new java.awt.Color(255, 255, 255));
         jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/verification5.png"))); // NOI18N
         jLabel53.setOpaque(true);
@@ -936,7 +982,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel54.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel54.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel54.setForeground(new java.awt.Color(255, 255, 255));
         jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel54.setText("Inventory");
 
@@ -966,7 +1012,7 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel29.setBackground(new java.awt.Color(255, 255, 255));
         jPanel29.setOpaque(false);
 
-        jLabel55.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel55.setBackground(new java.awt.Color(255, 255, 255));
         jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/men14.png"))); // NOI18N
         jLabel55.setOpaque(true);
@@ -977,7 +1023,7 @@ public class DashBoard extends javax.swing.JFrame {
         });
 
         jLabel56.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel56.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel56.setForeground(new java.awt.Color(255, 255, 255));
         jLabel56.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel56.setText("Suppliers");
 
@@ -1064,17 +1110,18 @@ public class DashBoard extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
 
         pnl_holder.add(pnl_maintenance, "card4");
 
-        pnl_transactions.setBackground(new java.awt.Color(234, 234, 234));
+        pnl_transactions.setBackground(new java.awt.Color(3, 170, 244));
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setOpaque(false);
 
-        jLabel26.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel26.setBackground(null);
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/weighing4.png"))); // NOI18N
         jLabel26.setOpaque(true);
@@ -1084,8 +1131,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel27.setBackground(null);
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("Readings");
 
@@ -1115,7 +1163,8 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setOpaque(false);
 
-        jLabel28.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel28.setBackground(null);
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/refresh61 (4).png"))); // NOI18N
         jLabel28.setOpaque(true);
@@ -1125,8 +1174,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel29.setBackground(null);
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("Back");
 
@@ -1156,7 +1206,8 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
         jPanel18.setOpaque(false);
 
-        jLabel32.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel32.setBackground(null);
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/cinema17.png"))); // NOI18N
         jLabel32.setOpaque(true);
@@ -1166,8 +1217,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel33.setBackground(null);
         jLabel33.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("Cashiering");
 
@@ -1215,17 +1267,18 @@ public class DashBoard extends javax.swing.JFrame {
                     .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addContainerGap(494, Short.MAX_VALUE))
         );
 
         pnl_holder.add(pnl_transactions, "card5");
 
-        pnl_reports.setBackground(new java.awt.Color(234, 234, 234));
+        pnl_reports.setBackground(new java.awt.Color(3, 170, 244));
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setOpaque(false);
 
-        jLabel36.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel36.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel36.setForeground(null);
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/family24 (1).png"))); // NOI18N
         jLabel36.setOpaque(true);
@@ -1235,8 +1288,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel37.setBackground(new java.awt.Color(255, 255, 255));
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel37.setText("Customers");
 
@@ -1266,7 +1320,8 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel21.setBackground(new java.awt.Color(255, 255, 255));
         jPanel21.setOpaque(false);
 
-        jLabel38.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel38.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel38.setForeground(null);
         jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/refresh61 (4).png"))); // NOI18N
         jLabel38.setOpaque(true);
@@ -1276,8 +1331,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel39.setBackground(new java.awt.Color(255, 255, 255));
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel39.setText("Back");
 
@@ -1307,7 +1363,8 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
         jPanel24.setOpaque(false);
 
-        jLabel44.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel44.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel44.setForeground(null);
         jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/commerce.png"))); // NOI18N
         jLabel44.setOpaque(true);
@@ -1317,8 +1374,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel45.setBackground(new java.awt.Color(255, 255, 255));
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel45.setForeground(new java.awt.Color(255, 255, 255));
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel45.setText("Collections");
 
@@ -1348,7 +1406,8 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel26.setBackground(new java.awt.Color(255, 255, 255));
         jPanel26.setOpaque(false);
 
-        jLabel48.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel48.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel48.setForeground(null);
         jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/google135.png"))); // NOI18N
         jLabel48.setOpaque(true);
@@ -1358,8 +1417,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel49.setBackground(new java.awt.Color(255, 255, 255));
         jLabel49.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel49.setForeground(new java.awt.Color(255, 255, 255));
         jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel49.setText("Stmt of Acc.");
 
@@ -1389,7 +1449,8 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel27.setBackground(new java.awt.Color(255, 255, 255));
         jPanel27.setOpaque(false);
 
-        jLabel50.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel50.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel50.setForeground(null);
         jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel50.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/map-pointer2.png"))); // NOI18N
         jLabel50.setOpaque(true);
@@ -1399,8 +1460,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel51.setBackground(new java.awt.Color(255, 255, 255));
         jLabel51.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel51.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel51.setForeground(new java.awt.Color(255, 255, 255));
         jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel51.setText("Assignments");
 
@@ -1430,7 +1492,8 @@ public class DashBoard extends javax.swing.JFrame {
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
         jPanel25.setOpaque(false);
 
-        jLabel46.setBackground(new java.awt.Color(234, 234, 234));
+        jLabel46.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel46.setForeground(null);
         jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vwws/icons/coins21.png"))); // NOI18N
         jLabel46.setOpaque(true);
@@ -1440,8 +1503,9 @@ public class DashBoard extends javax.swing.JFrame {
             }
         });
 
+        jLabel47.setBackground(new java.awt.Color(255, 255, 255));
         jLabel47.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel47.setText("Account Rec");
 
@@ -1498,7 +1562,7 @@ public class DashBoard extends javax.swing.JFrame {
                     .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addContainerGap(494, Short.MAX_VALUE))
         );
 
         pnl_holder.add(pnl_reports, "card6");
@@ -1758,6 +1822,9 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1785,6 +1852,7 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1810,8 +1878,9 @@ public class DashBoard extends javax.swing.JFrame {
     private void init_resources() {
         users = Users.ret_data("");
     }
-    
+
     CardLayout layout = new CardLayout();
+
     private void init_layout() {
         jDesktopPane1.setVisible(false);
         layout = (CardLayout) pnl_holder.getLayout();
@@ -1912,7 +1981,7 @@ public class DashBoard extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                Dlg_customers dtc = new Dlg_customers();
+                Dlg_customers_2 dtc = new Dlg_customers_2();
                 MyFrame.set2(dtc.getSurface(), jDesktopPane1, "Customers", dtc.getWidth(), dtc.getHeight());
             }
         });
@@ -2103,6 +2172,7 @@ public class DashBoard extends javax.swing.JFrame {
     private void r_collections() {
         jPanel3.setVisible(false);
         jDesktopPane1.setVisible(true);
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -2133,7 +2203,7 @@ public class DashBoard extends javax.swing.JFrame {
             @Override
             public void run() {
                 Dlg_report_meter_reader_assigments_status dtc = new Dlg_report_meter_reader_assigments_status();
-                MyFrame.set2(dtc.getSurface(), jDesktopPane1, "Meter Reader Assignments Status", dtc.getWidth(), dtc.getHeight());
+                MyFrame.set2(dtc.getSurface(), jDesktopPane1, "Meter Reader Assignments ", dtc.getWidth(), dtc.getHeight());
             }
         });
 
@@ -2146,7 +2216,7 @@ public class DashBoard extends javax.swing.JFrame {
             @Override
             public void run() {
                 Dlg_report_account_receivables dtc = new Dlg_report_account_receivables();
-                MyFrame.set2(dtc.getSurface(), jDesktopPane1, "Meter Reader Assignments Status", dtc.getWidth(), dtc.getHeight());
+                MyFrame.set2(dtc.getSurface(), jDesktopPane1, "Accounts Receivables", dtc.getWidth(), dtc.getHeight());
             }
         });
 

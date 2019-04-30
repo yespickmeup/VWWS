@@ -201,13 +201,14 @@ public class Rpt_statement_of_account {
             Connection conn = MyConnection.connect();
             String s0 = "select "
                     + "id"
+                    + ",reading_no"
                     + ",meter_reader_id"
-                    + ",meter_reader_no"
                     + ",meter_reader_name"
                     + ",customer_id"
                     + ",customer_no"
                     + ",customer_name"
-                    + ",customer_tax_dec_no"
+                    + ",customer_meter_no"
+                    + ",previous_reading_date"
                     + ",previous_reading"
                     + ",current_reading"
                     + ",city"
@@ -216,21 +217,30 @@ public class Rpt_statement_of_account {
                     + ",barangay_id"
                     + ",purok"
                     + ",purok_id"
-                    + ",address"
-                    + ",date_added"
-                    + ",date_updated"
-                    + ",added_by_id"
-                    + ",update_by_id"
+                    + ",sitio"
+                    + ",sitio_id"
+                    + ",created_at"
+                    + ",updated_at"
+                    + ",created_by"
+                    + ",updated_by"
                     + ",status"
                     + ",occupancy_id"
                     + ",occupancy"
                     + ",occupancy_type_id"
                     + ",occupancy_type"
                     + ",occupancy_type_code"
-                    + ",previous_reading_date"
+                    + ",actual_consumption"
+                    + ",amount_due"
+                    + ",mf"
+                    + ",mr"
+                    + ",interest"
+                    + ",discount"
+                    + ",net_due"
                     + ",is_paid"
                     + ",or_id"
                     + ",or_no"
+                    + ",date_uploaded"
+                    + ",is_uploaded"
                     + " from readings"
                     + " " + where;
 
@@ -238,69 +248,63 @@ public class Rpt_statement_of_account {
             ResultSet rs = stmt.executeQuery(s0);
             while (rs.next()) {
                 int id = rs.getInt(1);
-                String meter_reader_id = rs.getString(2);
-                String meter_reader_no = rs.getString(3);
+                String reading_no = rs.getString(2);
+                String meter_reader_id = rs.getString(3);
                 String meter_reader_name = rs.getString(4);
                 String customer_id = rs.getString(5);
                 String customer_no = rs.getString(6);
                 String customer_name = rs.getString(7);
-                String customer_tax_dec_no = rs.getString(8);
-                double previous_reading = rs.getDouble(9);
-                double current_reading = rs.getDouble(10);
-                String city = rs.getString(11);
-                String city_id = rs.getString(12);
-                String barangay = rs.getString(13);
-                String barangay_id = rs.getString(14);
-                String purok = rs.getString(15);
-                String purok_id = rs.getString(16);
-                String address = rs.getString(17);
-                String date_added = rs.getString(18);
-                String date_updated = rs.getString(19);
-                String added_by_id = rs.getString(20);
-                String update_by_id = rs.getString(21);
-                int status = rs.getInt(22);
-                String occupancy_id = rs.getString(23);
-                String occupancy = rs.getString(24);
-                String occupancy_type_id = rs.getString(25);
-                String occupancy_type = rs.getString(26);
-                String occupancy_type_code = rs.getString(27);
-                String previous_reading_date = rs.getString(28);
-                int is_paid = rs.getInt(29);
-                String or_id = rs.getString(30);
-                String or_no = rs.getString(31);
+                String customer_meter_no = rs.getString(8);
+                String previous_reading_date = rs.getString(9);
+                double previous_reading = rs.getDouble(10);
+                double current_reading = rs.getDouble(11);
+                String city = rs.getString(12);
+                String city_id = rs.getString(13);
+                String barangay = rs.getString(14);
+                String barangay_id = rs.getString(15);
+                String purok = rs.getString(16);
+                String purok_id = rs.getString(17);
+                String sitio = rs.getString(18);
+                String sitio_id = rs.getString(19);
+                String created_at = rs.getString(20);
+                String updated_at = rs.getString(21);
+                String created_by = rs.getString(22);
+                String updated_by = rs.getString(23);
+                int status = rs.getInt(24);
+                String occupancy_id = rs.getString(25);
+                String occupancy = rs.getString(26);
+                String occupancy_type_id = rs.getString(27);
+                String occupancy_type = rs.getString(28);
+                String occupancy_type_code = rs.getString(29);
+                double actual_consumption = rs.getDouble(30);
+                double amount_due = rs.getDouble(31);
+                double mf = rs.getDouble(32);
+                double mr = rs.getDouble(33);
+                double interest = rs.getDouble(34);
+                double discount = rs.getDouble(35);
+                double net_due = rs.getDouble(36);
+                int is_paid = rs.getInt(37);
+                String or_id = rs.getString(38);
+                String or_no = rs.getString(39);
+                String date_uploaded = rs.getString(40);
+                int is_uploaded = rs.getInt(41);
 
-                String where2 = " where occupancy='" + occupancy + "' and occupancy_type_id='" + occupancy_type_id + "' ";
-                List<Occupancy_types.to_occupancy_types> occupancy_types = Occupancy_types.ret_data(where2);
-                double amount = 0;
-                double amortization = 0;
-                double charge_amount = 0;
-                double amount_due = 0;
-                for (Occupancy_types.to_occupancy_types tt : occupancy_types) {
-                    String[] cubics = tt.cubic.split(",");
-                    double low = FitIn.toDouble(cubics[0]);
-                    double high = FitIn.toDouble(cubics[1]);
-                    if (cubics[1].equalsIgnoreCase("above")) {
-                        high = 100000;
-                    }
-                    double total_cubic = current_reading - previous_reading;
+                double amount = net_due;
+                double amortization = mr;
+                double charge_amount = mf;
 
-                    if (total_cubic >= low && total_cubic <= high) {
-                        amount_due = total_cubic * tt.charge + (tt.mf + tt.mr);
-                        charge_amount = tt.mf;
-                        amortization = tt.mr;
-                        break;
-                    }
-                }
+                double total_cubic = current_reading - previous_reading;
+
                 String period_from = DateType.convert_slash_datetime(previous_reading_date);
                 if (period_from.equals("02/08/1991")) {
                     period_from = "";
                 }
-                amount_due = (amount_due + charge_amount + amortization);
-                String period_to = DateType.convert_slash_datetime(date_added);
+
+                String period_to = DateType.convert_slash_datetime(created_at);
                 double present_reading = current_reading;
                 double previous_reading1 = previous_reading;
                 double total_consumption = present_reading - previous_reading1;
-                double interest = 0;
+
                 double less_amount = 0;
 
                 Rpt_statement_of_account.field f = new field(period_from, period_to, present_reading, previous_reading, total_consumption, interest, less_amount, amortization, charge_amount, amount_due);

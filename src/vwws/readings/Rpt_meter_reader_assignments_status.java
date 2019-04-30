@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
+import vwws.meter_readers.Meter_reader_assignments;
 import vwws.util.MyConnection;
 
 /**
@@ -45,14 +46,24 @@ public class Rpt_meter_reader_assignments_status {
 
         String customer_no;
         String customer_name;
+        String meter_no;
+        String barangay;
+        String occupancy;
+        String pipe_size;
+        String meter_reader;
         String status;
 
         public field() {
         }
 
-        public field(String customer_no, String customer_name, String status) {
+        public field(String customer_no, String customer_name, String meter_no, String barangay, String occupancy, String pipe_size, String meter_reader, String status) {
             this.customer_no = customer_no;
             this.customer_name = customer_name;
+            this.meter_no = meter_no;
+            this.barangay = barangay;
+            this.occupancy = occupancy;
+            this.pipe_size = pipe_size;
+            this.meter_reader = meter_reader;
             this.status = status;
         }
 
@@ -70,6 +81,46 @@ public class Rpt_meter_reader_assignments_status {
 
         public void setCustomer_name(String customer_name) {
             this.customer_name = customer_name;
+        }
+
+        public String getMeter_no() {
+            return meter_no;
+        }
+
+        public void setMeter_no(String meter_no) {
+            this.meter_no = meter_no;
+        }
+
+        public String getBarangay() {
+            return barangay;
+        }
+
+        public void setBarangay(String barangay) {
+            this.barangay = barangay;
+        }
+
+        public String getOccupancy() {
+            return occupancy;
+        }
+
+        public void setOccupancy(String occupancy) {
+            this.occupancy = occupancy;
+        }
+
+        public String getPipe_size() {
+            return pipe_size;
+        }
+
+        public void setPipe_size(String pipe_size) {
+            this.pipe_size = pipe_size;
+        }
+
+        public String getMeter_reader() {
+            return meter_reader;
+        }
+
+        public void setMeter_reader(String meter_reader) {
+            this.meter_reader = meter_reader;
         }
 
         public String getStatus() {
@@ -177,8 +228,8 @@ public class Rpt_meter_reader_assignments_status {
                 if (a != 0) {
                     state = "Ok";
                 }
-                Rpt_meter_reader_assignments_status.field f = new field(customer_no, customer_name, state);
-                datas.add(f);
+//                Rpt_meter_reader_assignments_status.field f = new field(customer_no, customer_name, state);
+//                datas.add(f);
             }
             return datas;
         } catch (SQLException e) {
@@ -188,4 +239,88 @@ public class Rpt_meter_reader_assignments_status {
         }
     }
 
+    public static List<Rpt_meter_reader_assignments_status.field> ret_assignments(String where) {
+        List<Rpt_meter_reader_assignments_status.field> datas = new ArrayList();
+//+ ",concat(c.lname,', ',c.fname,' ',c.mi)"
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "c.id"
+                    + ",c.customer_no"
+                    + ",concat(c.lname,'',ifnull(c.fname,''),'',ifnull(c.mi,'')) as name"
+                    + ",c.barangay"
+                    + ",c.barangay_id"
+                    + ",c.purok"
+                    + ",c.purok_id"
+                    + ",c.date_added"
+                    + ",c.date_updated"
+                    + ",c.added_by_id"
+                    + ",c.updated_by_id"
+                    + ",c.status"
+                    + ",c.occupancy_id"
+                    + ",c.occupancy"
+                    + ",c.occupancy_type_id"
+                    + ",c.occupancy_type"
+                    + ",c.occupancy_type_code"
+                    + ",c.city"
+                    + ",c.city_id"
+                    + ",c.sitio"
+                    + ",c.sitio_id"
+                    + ",ifnull(c.meter_no,'')"
+                    + ",c.pipe_size"
+                    + ",mra.meter_reader_id"
+                    + ",mra.meter_reader_no"
+                    + ",ifnull(mra.meter_reader_name,'')"
+                    + ",mra.customer_id"
+                    + " from customers c  "
+                    + " left join meter_reader_assignments mra "
+                    + " on c.customer_no=mra.customer_no "
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+
+                String customer_no = rs.getString(2);
+                String customer_name = rs.getString(3);
+                String barangay = rs.getString(4);
+                String barangay_id = rs.getString(5);
+                String purok = rs.getString(6);
+                String purok_id = rs.getString(7);
+                String date_added = rs.getString(8);
+                String date_updated = rs.getString(9);
+                String added_by_id = rs.getString(10);
+                String update_by_id = rs.getString(11);
+                int status = rs.getInt(12);
+                String occupancy_id = rs.getString(13);
+                String occupancy = rs.getString(14);
+                String occupancy_type_id = rs.getString(15);
+                String occupancy_type = rs.getString(16);
+                String occupancy_type_code = rs.getString(17);
+                String city = rs.getString(18);
+                String city_id = rs.getString(19);
+                String sitio = rs.getString(20);
+                String sitio_id = rs.getString(21);
+                String meter_no = rs.getString(22);
+                String pipe_size = rs.getString(23);
+
+                String meter_reader_id = rs.getString(24);
+                String meter_reader_no = rs.getString(25);
+                String meter_reader_name = rs.getString(26);
+                String customer_id = "" + id;
+
+                occupancy = occupancy_type_code + " - " + occupancy_type;
+                String meter_reader = meter_reader_name;
+                String status1 = "";
+                Rpt_meter_reader_assignments_status.field f = new field(customer_no, customer_name, meter_no, barangay, occupancy, pipe_size, meter_reader, status1);
+                datas.add(f);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
 }
