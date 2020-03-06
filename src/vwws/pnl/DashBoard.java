@@ -35,7 +35,7 @@ import vwws.meter_readers.Dlg_meter_readers;
 import vwws.occupancies.Dlg_occupancies;
 import vwws.occupancy_types.Dlg_occupancy_types;
 import vwws.pipe_sizes.Dlg_pipe_sizes;
-import vwws.readings.Dlg_readings;
+import vwws.readings.Dlg_reading_overide;
 import vwws.readings.Dlg_report_meter_reader_assigments_status;
 import vwws.statement_of_account.Dlg_statement_of_account;
 import vwws.suppliers.Dlg_suppliers;
@@ -2136,8 +2136,8 @@ public class DashBoard extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Dlg_readings dtc = new Dlg_readings();
-                MyFrame.set2(dtc.getSurface(), jDesktopPane1, "Readings", dtc.getWidth(), dtc.getHeight());
+                Dlg_reading_overide dtc = new Dlg_reading_overide();
+                MyFrame.set(dtc.getSurface(), jDesktopPane1, "Readings");
             }
         });
 

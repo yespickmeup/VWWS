@@ -1066,7 +1066,9 @@ public class Dlg_meter_reader_assignments extends javax.swing.JDialog {
                             id = customer.meter_is_paid;
                         }
                         String meter_reader_id = data.meter_reader_id;
-                        String meter_reader_no = "";
+                        List<Meter_readers.to_meter_readers> reader1=Meter_readers.ret_data(" where id='"+meter_reader_id+"'");
+                        Meter_readers.to_meter_readers to2=reader1.get(0);
+                        String meter_reader_no = to2.meter_reader_no;
                         String meter_reader_name = data.meter_reader_name;
                         String customer_id = "" + customer.id;
                         String customer_no = "" + customer.customer_no;

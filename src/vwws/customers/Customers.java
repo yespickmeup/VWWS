@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import mijzcx.synapse.desk.utils.FitIn;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.ReceiptIncrementor;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
@@ -512,6 +513,142 @@ public class Customers {
                 boolean selected = false;
                 String pipe_size = rs.getString(40);
                 to_customers to = new to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, sitio, sitio_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, updated_by_id, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no, meter_description, serial_no, status, selected, pipe_size);
+                datas.add(to);
+            }
+            return datas;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            MyConnection.close();
+        }
+    }
+
+    public static List<to_customers> ret_data_reading(String where) {
+        List<to_customers> datas = new ArrayList();
+
+        try {
+            Connection conn = MyConnection.connect();
+            String s0 = "select "
+                    + "id"
+                    + ",customer_no"
+                    + ",ifnull(fname,'')"
+                    + ",ifnull(mi,'')"
+                    + ",lname"
+                    + ",bday"
+                    + ",city"
+                    + ",city_id"
+                    + ",barangay"
+                    + ",barangay_id"
+                    + ",purok"
+                    + ",purok_id"
+                    + ",sitio"
+                    + ",sitio_id"
+                    + ",address"
+                    + ",balance"
+                    + ",tax_dec_no"
+                    + ",meter_is_paid"
+                    + ",date_added"
+                    + ",date_updated"
+                    + ",added_by_id"
+                    + ",updated_by_id"
+                    + ",occupancy_id"
+                    + ",occupancy"
+                    + ",occupancy_type_id"
+                    + ",occupancy_type"
+                    + ",occupancy_type_code"
+                    + ",gender"
+                    + ",religion"
+                    + ",height"
+                    + ",weight"
+                    + ",civil_status"
+                    + ",contact_landline"
+                    + ",contact_mobile"
+                    + ",contact_email"
+                    + ",ifnull(meter_no,'')"
+                    + ",meter_description"
+                    + ",serial_no"
+                    + ",status"
+                    + ",pipe_size"
+                    + " from customers"
+                    + " " + where;
+
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(s0);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String customer_no = rs.getString(2);
+                String fname = rs.getString(3);
+                String mi = rs.getString(4);
+                String lname = rs.getString(5);
+                String bday = rs.getString(6);
+                String city = rs.getString(7);
+                String city_id = rs.getString(8);
+                String barangay = rs.getString(9);
+                String barangay_id = rs.getString(10);
+                String purok = rs.getString(11);
+                String purok_id = rs.getString(12);
+                String sitio = rs.getString(13);
+                String sitio_id = rs.getString(14);
+                String address = rs.getString(15);
+                double balance = rs.getDouble(16);
+                String tax_dec_no = rs.getString(17);
+                int meter_is_paid = rs.getInt(18);
+                String date_added = rs.getString(19);
+                String date_updated = rs.getString(20);
+                String added_by_id = rs.getString(21);
+                String updated_by_id = rs.getString(22);
+                String occupancy_id = rs.getString(23);
+                String occupancy = rs.getString(24);
+                String occupancy_type_id = rs.getString(25);
+                String occupancy_type = rs.getString(26);
+                String occupancy_type_code = rs.getString(27);
+                String gender = rs.getString(28);
+                String religion = rs.getString(29);
+                String height = rs.getString(30);
+                String weight = rs.getString(31);
+                String civil_status = rs.getString(32);
+                String contact_landline = rs.getString(33);
+                String contact_mobile = rs.getString(34);
+                String contact_email = rs.getString(35);
+                String meter_no = rs.getString(36);
+                String meter_description = rs.getString(37);
+                String serial_no = rs.getString(38);
+                int status = rs.getInt(39);
+                boolean selected = false;
+                String pipe_size = rs.getString(40);
+
+                String s2 = "select "
+                        + "id"
+                        + ",reading_no"
+                        + ",previous_reading_date"
+                        + ",previous_reading"
+                        + ",current_reading"
+                        + ",status"
+                        + " from readings"
+                        + " where customer_id='" + id + "' order by id desc limit 1";
+
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(s2);
+
+                double previous_reading = 0;
+                double current_reading = 0;
+                int id2 = 0;
+                int status2 = 0;
+                while (rs2.next()) {
+                    id2 = rs2.getInt(1);
+                    String reading_no = rs2.getString(2);
+                    String previous_reading_date = rs2.getString(3);
+                    previous_reading = rs2.getDouble(4);
+                    current_reading = rs2.getDouble(5);
+                    status2 = rs2.getInt(6);
+                }
+                
+                contact_mobile = "" + id2;
+                contact_landline = "" + status2;
+                contact_email = "" + FitIn.fmt_woc(previous_reading) + " - " + FitIn.fmt_woc(current_reading);
+
+                to_customers to = new to_customers(id, customer_no, fname, mi, lname, bday, city, city_id, barangay, barangay_id, purok, purok_id, sitio, sitio_id, address, balance, tax_dec_no, meter_is_paid, date_added, date_updated, added_by_id, updated_by_id, occupancy_id, occupancy, occupancy_type_id, occupancy_type, occupancy_type_code, gender, religion, height, weight, civil_status, contact_landline, contact_mobile, contact_email, meter_no, meter_description, serial_no, status, selected, pipe_size);
+
                 datas.add(to);
             }
             return datas;

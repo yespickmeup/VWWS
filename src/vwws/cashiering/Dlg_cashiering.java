@@ -343,8 +343,18 @@ public class Dlg_cashiering extends javax.swing.JDialog {
         jCheckBox4.setText("All");
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox3.setSelected(true);
@@ -753,6 +763,14 @@ public class Dlg_cashiering extends javax.swing.JDialog {
     private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
         data_cols();
     }//GEN-LAST:event_jTextField7KeyReleased
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1364,9 +1382,9 @@ public class Dlg_cashiering extends javax.swing.JDialog {
                 String customer_no = customer.customer_no;
                 String meter_no = customer.meter_no;
                 Reading_payments.to_reading_payments rp = new Reading_payments.to_reading_payments(id, or_no, customer_id, customer_name, reading_ids1, amount_due,
-                         amount_paid, cash_paid, check_amount, check_bank, check_no, check_holder, check_date, discount_name, discount_amount, discount_rate,
-                         discount_customer_name, discount_customer_id, city, city_id, barangay, barangay_id, purok, purok_id, address, date_added, date_updated,
-                         added_by_id, update_by_id, status, is_counted, customer_no, meter_no);
+                                                                                                   amount_paid, cash_paid, check_amount, check_bank, check_no, check_holder, check_date, discount_name, discount_amount, discount_rate,
+                                                                                                   discount_customer_name, discount_customer_id, city, city_id, barangay, barangay_id, purok, purok_id, address, date_added, date_updated,
+                                                                                                   added_by_id, update_by_id, status, is_counted, customer_no, meter_no);
                 int add = 0;
 
                 do {
